@@ -3,7 +3,19 @@ const router = require('express').Router();
 
 
 // Renders the main page
+
+
 router.get('/', async (req, res) => {
+    try {
+        res.render('home')
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
+
+
+
+router.get('/login', async (req, res) => {
     try {
         res.render('login')
     } catch (err) {
@@ -20,13 +32,7 @@ router.get('/search', async (req, res) => {
 });
 
 
-router.get('/home', async (req, res) => {
-    try {
-        res.render('home')
-    } catch (err) {
-        res.status(500).json(err)
-    }
-});
+
 
 router.get('/alerts', async (req, res) => {
     try {
@@ -35,6 +41,7 @@ router.get('/alerts', async (req, res) => {
         res.status(500).json(err)
     }
 });
+
 // View specific drug
 // router.get('/drug/:id', withAuth, async (req, res) => {
 //     try {
