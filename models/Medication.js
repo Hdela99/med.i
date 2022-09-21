@@ -20,6 +20,10 @@ Medication.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    route_of_medication: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     sequelize,
