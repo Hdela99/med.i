@@ -1,12 +1,13 @@
 const fetch = require(`node-fetch`);
 var APIkey = "EEMqkuqHACLyxrKVimScECwbzR5PNHHab9HyTmZo";
-`https://api.fda.gov/drug/event.json?api_key=${APIkey}&search=...`;
-fetch(`https://api.fda.gov/drug/event.json?api_key=${APIkey}&search=...`)
+fetch(
+  `https://api.fda.gov/drug/event.json?api_key=EEMqkuqHACLyxrKVimScECwbzR5PNHHab9HyTmZo&search=patient.reaction.reactionmeddrapt:"fatigue"&limit=1`
+)
   .then((response) => {
     return response.json();
   })
   .then((data) => {
-    console.log(JSON.stringify(data));
+    console.log(data);
   });
 
 async function getData() {
@@ -26,4 +27,4 @@ async function getData() {
   }
 }
 
-getData;
+getData();
