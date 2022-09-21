@@ -1,10 +1,9 @@
-
 // Import required packages
-const path = require('path');
-const express = require('express');
-const routes = require('./controllers');
-const exphbs = require('express-handlebars');
-const session = require('express-session');
+const path = require("path");
+const express = require("express");
+const routes = require("./controllers");
+const exphbs = require("express-handlebars");
+const session = require("express-session");
 // const helpers = require('./utils/helpers')
 
 // // Setting up sequelize & session storage
@@ -14,7 +13,7 @@ const session = require('express-session');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// // Configuring session 
+// // Configuring session
 // const sess = {
 //   secret: process.env.SECRET || "temporary secret",
 //   cookie: {},
@@ -27,15 +26,14 @@ const PORT = process.env.PORT || 3001;
 // app.use(session(sess));
 
 // Note need to add .create({helpers})
-const hbs = exphbs.create();
+const hbs = exphbs.create({});
 
-app.engine('handlebars', hbs.engine)
-app.set('view engine', 'handlebars');
-
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(routes);
 

@@ -1,0 +1,40 @@
+
+<div id="intro">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Welcome to Med.i</h1>
+            <p class="lead">A place to make medicine safe for me.</p>
+        </div>
+    </div>
+</div>
+
+
+<div id="rxCabinet">
+
+    {{!-- {{#if rx}} --}}
+    <h1> Your current prescriptions:</h1>
+
+    <div class="container-fluid d-flex justify-content-around">
+
+
+        {{!-- {{#each rx}} --}}
+        {{> rx-card}}
+        {{> rx-card}}
+        {{> rx-card}}
+        {{> rx-card}}
+
+
+
+    </div>
+    {{!-- {{else}} --}}
+
+    {{!-- {{/if rx}} --}}
+
+</div>
+
+
+{{!-- Code goes here for adding to patient's cabinet --}}
+
+
+
+<script src="./js/homescreen.js"></script>
