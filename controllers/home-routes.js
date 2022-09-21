@@ -23,6 +23,7 @@ router.get('/login', async (req, res) => {
     }
 });
 
+
 router.get('/search', async (req, res) => {
     try {
         res.render('search')
@@ -30,7 +31,6 @@ router.get('/search', async (req, res) => {
         res.status(500).json(err)
     }
 });
-
 
 
 
