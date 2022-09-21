@@ -32,6 +32,14 @@ router.get('/search', async (req, res) => {
 });
 
 
+router.get('/results', async (req, res) => {
+    try {
+        res.render('results')
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
+
 
 
 router.get('/alerts', async (req, res) => {
