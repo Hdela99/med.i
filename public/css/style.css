@@ -1,23 +1,21 @@
 /* Custom CSS for intro screen */
 #intro {
-    opacity: 0;
-    transition: all 2s ease-in
+  opacity: 0;
+  transition: all 2s ease-in;
 }
 
 #intro.active {
-    opacity: 1;
+  opacity: 1;
 }
 
 #rxCabinet {
-    opacity: 0;
-    transition: all 2s ease-in
+  opacity: 0;
+  transition: all 2s ease-in;
 }
 
 #rxCabinet.active {
-    opacity: 1;
+  opacity: 1;
 }
-
-
 
 .component {
   color: var(--bs-gray-800);
@@ -28,4 +26,12 @@
 
 .component-header {
   color: var(--bs-purple);
+}
+
+.form-check {
+  position: relative;
+  display: inline-block;
+  padding-left: 1.25rem;
+  min-height: 1.5rem;
+  margin-bottom: 0.125rem;
 }

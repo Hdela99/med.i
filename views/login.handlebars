@@ -5,41 +5,72 @@
   <h1 class="display-5 fw-bold">Med.i</h1>
   </div>
 
+<main class="form-signin w-100 m-auto">
+
     <div class="col-md-10 mx-auto col-lg-5">
-      <form class="p-4 p-md-5 border rounded-3 bg-med">
+      <form class="p-4 border rounded-3 bg-med needs-validation" novalidate>
+        {{!-- p-md-5 --}}
         <div class="form-floating mb-3">
           <input
             type="email"
             class="form-control"
             id="floatingEmail"
             placeholder="name@example.com"
+            required
           />
-          <label for="floatingEmail">Email address</label>
+          <label for="floatingEmail" class="form-label">Email address</label>
         </div>
-        <div class="form-floating mb-3">
+        {{!-- might have to make each valid and invalid feedback for each input ('em') --}}
+        {{!-- <div class="valid-feedback">
+            Email is valid and exists in our database.
+        </div>
+          <div class="invalid-feedback">
+            Email is incorrect/not registered.
+          </div> --}}
+
+        <div class="form-floating myb-3">
           <input
             type="password"
             class="form-control"
             id="floatingPassword"
             placeholder="Password"
+            required
           />
-          <label for="floatingPassword">Password</label>
+          <label for="floatingPassword" class="form-label">Password</label>
+          {{!-- <div class="valid-feedback">
+            Password is accurate!
+          </div>
+          <div class="invalid-feedback">
+            Password is incorrect. 
+          </div> --}}
         </div>
-        <div class="checkbox mb-3">
+
+  <hr class="my-4" />
+
+        <div class="form-check myb-3">
+        <input type="checkbox" value="new-user" />
           <label>
-            <input type="checkbox" value="new-user" />
             New User? Check box to sign up.
           </label>
-        </div>
-        {{! <div class="checkbox mb-3">
+          </div>
+
+            <div class="form-check myb-3">
+              <input type="checkbox" value="accept-terms" />
+          <label>
+            Accept terms and conditions?
+          </label>
+          </div>
+          {{! <div class="checkbox mb-3">
             <label>
               <input type="checkbox" value="remember-me"> Remember me
             </label>
           </div> }}
+            <hr class="my-4" />
         <button class="w-100 btn btn-lg btn-primary" type="submit">Log In</button>
         <hr class="my-4" />
         {{! <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small> }}
       </form>
+  
     </div>
 
     {{!-- 
@@ -105,6 +136,7 @@
                 Submit
             </button>
         </form> }}
-
+    </main>
   </div>
 </div>
+<script src="../public/js/login.js"></script>
