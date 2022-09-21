@@ -1,3 +1,6 @@
 node_modules
 .env
 .DS_Store
+/public/assets/fields.xlsx
+./public/assets/~$fields
+public/assets/~$fields.xlsx
