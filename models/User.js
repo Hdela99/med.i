@@ -1,8 +1,14 @@
 const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/connection.js");
+const bcrypt = require("bcrypt");
 
-class User extends Model {}
+// Initialize user with the pwVerification function
+class User extends Model {
+  pwVerification(pw) {
+    return bcrypt.compareSync(pw, this.password);
+  }
+};
 
 User.init(
   {
@@ -16,12 +22,36 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {},
     email: {
-      //validate this Future Mario
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [8],
+      },
     },
   },
   {
+    hooks: {
+      beforeCreate: async (newUserData) => {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+      beforeUpdate: async (updatedUserData) => {
+        updatedUserData.password = await bcrypt.hash(
+          updatedUserData.password,
+          10
+        );
+        return updatedUserData;
+      },
+    },
     sequelize,
     timestamps: false,
     freezeTableName: true,

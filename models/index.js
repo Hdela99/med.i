@@ -9,8 +9,9 @@ User.hasMany(Medication, {
 Medication.belongsToMany(User, {
   through: {
     model: UserMedication,
-    foreignKey: "",
+    foreignKey: "user_id",
     unique: false,
   },
-  as: "",
 });
+
+module.exports = { User, Medication, Comment };
