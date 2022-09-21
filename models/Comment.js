@@ -12,15 +12,19 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    comment_name: {
+    comment: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    date_created: {
+      type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
     user_id: {
       references: {
         model: "user",
         key: "id",
-        // unique: true,
       },
     },
   },
