@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/connection.js");
 
-class Comment extends Model {}
+class Comment extends Model { }
 
 Comment.init(
   {
@@ -22,6 +22,7 @@ Comment.init(
       defaultValue: DataTypes.NOW,
     },
     user_id: {
+      type: DataTypes.INTEGER,
       references: {
         model: "user",
         key: "id",
