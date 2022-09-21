@@ -1,12 +1,48 @@
 <div class="login-card">
-    <div class="login-card-header">
-        <p>
-            Login Page
-        </p>
+  <div class="login-card-header">
+  </div>
+  <div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">Med.i</h1>
+  </div>
+
+    <div class="col-md-10 mx-auto col-lg-5">
+      <form class="p-4 p-md-5 border rounded-3 bg-light">
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingEmail"
+            placeholder="name@example.com"
+          />
+          <label for="floatingEmail">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="new-user" />
+            New User? Check box to sign up.
+          </label>
+        </div>
+        {{! <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div> }}
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Log In</button>
+        <hr class="my-4" />
+        {{! <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small> }}
+      </form>
     </div>
-    <div class="add-login-info">
-        <p>
-            Enter Your Login Info
+
+    {{!-- 
         <form class="new-email-form">
             <label for="email">
                 Email Address:
@@ -50,8 +86,8 @@
                 <div>
 
                 </div>
-            </div>
-            <div class="missing-info">
+            </div> --}}
+    {{!-- <div class="missing-info">
                 {{#unless email}}
                 <h3>You are missing your email address</h3>
                 {{/unless}}
@@ -63,12 +99,12 @@
                 {{/unless}}
 
 
-            </div>
-            <br />
+            </div> --}}
+    {{! <br />
             <button type="submit" value="Submit">
                 Submit
             </button>
-        </form>
-        </p>
-    </div>
+        </form> }}
+
+  </div>
 </div>
