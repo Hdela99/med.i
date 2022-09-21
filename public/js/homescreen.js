@@ -11,6 +11,9 @@ const renderRx = () => {
     rx.classList.add('active');
 }
 
+const underline = () => {
+    rx.classList.add('active');
+}
 
 const main = () => {
     setTimeout(renderIntro, 10);
