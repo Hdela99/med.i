@@ -18,14 +18,13 @@
 }
 
 
-
 .component {
-  color: var(--bs-gray-800);
-  background-color: var(--bs-gray-100);
-  border: 1px solid var(--bs-gray-200);
-  border-radius: 0.25rem;
+    color: var(--bs-gray-800);
+    background-color: var(--bs-gray-100);
+    border: 1px solid var(--bs-gray-200);
+    border-radius: 0.25rem;
 }
 
 .component-header {
-  color: var(--bs-purple);
+    color: var(--bs-purple);
 }
