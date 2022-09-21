@@ -11,9 +11,9 @@ async function getData() {
     })
     .then((data) => {
       console.log(data);
+      console.log(data.results[0].patient.drug);
     });
 }
-getData();
 
 async function getInteraction(drug) {
   const response = await fetch(
@@ -23,8 +23,12 @@ async function getInteraction(drug) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
+      console.log(data.results.length);
+      for (i = 0; i < data.results.length; i++) {
+        console.log(data.results[i].term);
+      }
+      console.log(typeof data.results);
     });
 }
-getInteraction("hydrocodone");
-getInteraction("caffeine");
+getData();
+getInteraction("ibuprofen");
