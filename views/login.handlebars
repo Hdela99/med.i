@@ -5,32 +5,139 @@
     <h1 class="display-5 fw-bold">Med.i</h1>
   </div>
 
-  <div class="col-md-10 mx-auto col-lg-5">
-    <form class="p-4 p-md-5 border rounded-3 bg-light">
-      <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" />
-        <label for="floatingEmail">Email address</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
-        <label for="floatingPassword">Password</label>
-      </div>
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="new-user" />
-          New User? Check box to sign up.
-        </label>
-      </div>
-      {{! <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div> }}
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Log In</button>
-      <hr class="my-4" />
-      {{! <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small> }}
-    </form>
-  </div>
+<main class="form-signin w-100 m-auto">
 
+    <div class="col-md-10 mx-auto col-lg-5">
+      <form class="p-4 border rounded-3 bg-med needs-validation" novalidate>
+        {{!-- p-md-5 --}}
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingEmail"
+            placeholder="name@example.com"
+            required
+          />
+          <label for="floatingEmail" class="form-label">Email address</label>
+        </div>
+        {{!-- might have to make each valid and invalid feedback for each input ('em') --}}
+        {{!-- <div class="valid-feedback">
+            Email is valid and exists in our database.
+        </div>
+          <div class="invalid-feedback">
+            Email is incorrect/not registered.
+          </div> --}}
+
+        <div class="form-floating myb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+            required
+          />
+          <label for="floatingPassword" class="form-label">Password</label>
+          {{!-- <div class="valid-feedback">
+            Password is accurate!
+          </div>
+          <div class="invalid-feedback">
+            Password is incorrect. 
+          </div> --}}
+        </div>
+
+  <hr class="my-4" />
+
+        <div class="form-check myb-3">
+        <input type="checkbox" value="new-user" />
+          <label>
+            New User? Check box to sign up.
+          </label>
+          </div>
+
+            <div class="form-check myb-3">
+              <input type="checkbox" value="accept-terms" />
+          <label>
+            Accept terms and conditions?
+          </label>
+          </div>
+          {{! <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div> }}
+            <hr class="my-4" />
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Log In</button>
+        <hr class="my-4" />
+        {{! <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small> }}
+      </form>
+  
+    </div>
+
+    {{!-- 
+        <form class="new-email-form">
+            <label for="email">
+                Email Address:
+            </label>
+            <br />
+            <textarea id="email" name="email" rows="1" cols="30">
+          {{email}}
+        </textarea>
+            <br />
+            <label for="password">
+                Password:
+            </label>
+            <br />
+            <textarea id="password" name="password" rows="1" cols="30">
+          {{password}}
+        </textarea>
+            <br />
+            <label for="birthday">
+                DOB:
+            </label>
+            <br />
+            <input type="date" name="dateofbirth" id="dateofbirth">
+            {{dateofbirth}}
+            </input>
+            <br />
+            <br />
+            <input type="checkbox" id="create_new_user" name="create_new_user" value="true" />
+
+            <label for="create_new_user">
+                Check box if you are a first time user/creating an account
+            </label>
+            <button type="submit" value="true">
+                I'm New!
+            </button>
+            <div class="new-user">
+                {{#if create_new_user}}
+                <h3>ENTER DISCLAIMER HERE FOR USER TO SIGN OFF ON</h3>
+                {{else}}
+                <h3>Welcome Back</h3>
+                {{/if}}
+                <div>
+
+                </div>
+            </div> --}}
+    {{!-- <div class="missing-info">
+                {{#unless email}}
+                <h3>You are missing your email address</h3>
+                {{/unless}}
+                {{#unless password}}
+                <h3>You are missing your password</h3>
+                {{/unless}}
+                {{#unless dateofbirth}}
+                <h3>You are missing your birthdate</h3>
+                {{/unless}}
+
+
+            </div> --}}
+    {{! <br />
+            <button type="submit" value="Submit">
+                Submit
+            </button>
+        </form> }}
+    </main>
+  </div>
 </div>
-</div>
+<script src="../public/js/login.js"></script>
+
