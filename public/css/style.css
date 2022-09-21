@@ -1,3 +1,13 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.filter-blue {
+
+    filter: invert(26%) sepia(100%) saturate(2409%) hue-rotate(179deg) brightness(88%) contrast(83%);
+
+}
+
 /* Custom CSS for intro screen */
 #intro {
     opacity: 0;
@@ -16,6 +26,7 @@
 #rxCabinet.active {
     opacity: 1;
 }
+
 
 
 .component {

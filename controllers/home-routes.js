@@ -24,9 +24,9 @@ router.get('/login', async (req, res) => {
 });
 
 
-router.get('/search', async (req, res) => {
+router.get('/results', async (req, res) => {
     try {
-        res.render('search')
+        res.render('results')
     } catch (err) {
         res.status(500).json(err)
     }
