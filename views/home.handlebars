@@ -1,0 +1,79 @@
+<div class="login-card">
+  <div class="login-card-header">
+    <p>
+      Login Page
+    </p>
+  </div>
+  <div class="add-login-info">
+    <p>
+      Enter Your Login Info
+      <form class="new-email-form">
+        <label for="email">
+          Email Address:
+        </label>
+        <br />
+        <textarea id="email" name="email" rows="1" cols="30">
+          {{email}}
+        </textarea>
+        <br />
+        <label for="password">
+          Password:
+        </label>
+        <br />
+        <textarea id="password" name="password" rows="1" cols="30">
+          {{password}}
+        </textarea>
+        <br />
+        <label for="birthday">
+          DOB:
+        </label>
+        <br />
+        <input type="date" name="dateofbirth" id="dateofbirth">
+          {{dateofbirth}}
+        </input>
+        <br />
+        <br />
+        <input
+          type="checkbox"
+          id="create_new_user"
+          name="create_new_user"
+          value="true"
+        />
+
+        <label for="create_new_user">
+          Check box if you are a first time user/creating an account
+        </label>
+        <button type="submit" value="true">
+          I'm New!
+        </button>
+        <div class="new-user">
+          {{#if create_new_user}}
+            <h3>ENTER DISCLAIMER HERE FOR USER TO SIGN OFF ON</h3>
+          {{else}}
+            <h3>Welcome Back</h3>
+          {{/if}}
+          <div>
+
+          </div>
+        </div>
+        <div class="missing-info">
+            {{#unless email}}
+            <h3>You are missing your email address</h3>
+            {{/unless}}
+            {{#unless password}}
+            <h3>You are missing your password</h3>
+            {{/unless}}
+            {{#unless dateofbirth}}
+            <h3>You are missing your birthdate</h3>
+            {{/unless}}
+            
+
+        </div>
+        <br />
+        <button type="submit" value="Submit">
+          Submit
+        </button>
+      </form>
+    </p>
+  </div>
+</div>
