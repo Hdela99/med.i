@@ -31,4 +31,5 @@ async function getInteraction(drug) {
     });
 }
 getData();
+
 getInteraction("ibuprofen");
