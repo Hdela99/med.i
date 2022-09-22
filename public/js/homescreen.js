@@ -7,7 +7,6 @@ const carouselItems = document.querySelectorAll('.carousel .carousel-item')
 const smScreenItems = document.querySelector("#smallContent")
 
 
-console.log(smScreenItems)
 const renderIntro = () => {
     intro.classList.add('active');
 }
@@ -26,8 +25,8 @@ const main = () => {
     }
 }
 
-// Configure carousel function to activate only if the screenwidth is >=1400px;
-if (screen.width >= 1440) {
+// Configure carousel function to activate only if the screenwidth is >=1400px and if there are 4 or more items;
+if (screen.width >= 1440 && carouselItems.length > 3) {
 
     removeChildren(smScreenItems);
     carouselItems[0].classList.add('active');
@@ -47,8 +46,8 @@ if (screen.width >= 1440) {
         }
     })
 } else {
-    removeChildren(carousel);
 
+    removeChildren(carousel);
 }
 
 
