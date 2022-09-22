@@ -7,7 +7,7 @@
 
             {{else}}
             <div>
-                <h1 class="display-4 ">Welcome back <i>Naruto Uzumaki{{user_name}}</i></h1>
+                <h1 class="display-4 ">Welcome back <i>Omori{{user_name}}</i></h1>
                 <hr>
             </div>
             {{/if}}
@@ -18,29 +18,64 @@
 
 <div id="rxCabinet">
 
-    {{!-- {{#if rx}} --}}
-    <h1 style="padding-left:12px"> <i>Your current prescriptions:</i></h1>
+    {{!-- Displays only if screen resolution >=1440px --}}
+    <div class="row mx-auto my-auto justify-content-center">
+        <h2>Your current medicine cabinet:</h2>
 
-    <div class="container-fluid d-flex justify-content-around">
+        <div id="rxCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+
+                {{!-- {{#each rxItem}} --}}
+                {{> carousel-item}}
+                {{> carousel-item}}
+
+                {{> carousel-item}}
+                {{> carousel-item}}
+
+                {{> carousel-item}}
+
+                {{!-- {{/each}} --}}
+
+            </div>
+            <a class="carousel-control-prev bg-transparent w-aut" href="#rxCarousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon filter-blue" aria-hidden="true"></span>
+
+            </a>
+            <a class="carousel-control-next bg-transparent w-aut" href="#rxCarousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon filter-blue" aria-hidden="true"></span>
+
+            </a>
+
+        </div>
 
 
-        {{!-- {{#each rx}} --}}
-        {{> rx-card}}
-        {{> rx-card}}
-        {{> rx-card}}
-        {{> rx-card}}
+        <div id="smallContent" class="container-fluid d-flex flex-sm-column ">
 
 
+            {{!-- {{#each rx}} --}}
+            {{> rx-card}}
+            {{> rx-card}}
+            {{> rx-card}}
+            {{> rx-card}}
+            {{!-- {{/each}} --}}
+
+
+        </div>
+    </div>
+
+<hr>
+    <div>
+        <a class="d-flex flex-column align-items-center justify-content-center  text-decoration-none"
+            href="/api/addRx"><img src="./assets/plus.svg" width="80px" class="filter-blue">
+            <p class="fs-6 fst-italic text-muted">Add another Rx</p>
+        </a>
 
     </div>
-    {{!-- {{else}} --}}
-
-    {{!-- {{/if rx}} --}}
-
 </div>
 
 
 {{!-- Code goes here for adding to patient's cabinet --}}
+
 
 
 
