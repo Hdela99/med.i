@@ -1,6 +1,7 @@
 const User = require("./User");
 const Comment = require("./Comment");
 const Medication = require("./Medication");
+
 const UserMedication = require("./UserMedication");
 
 User.hasMany(Medication, {
