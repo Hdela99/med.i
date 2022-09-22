@@ -4,7 +4,7 @@ const express = require("express");
 const routes = require("./controllers");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
-// const helpers = require('./utils/helpers')
+const helpers = require('./utils/helpers')
 
 // Setting up sequelize & session storage
 const sequelize = require('./config/connection');
@@ -16,8 +16,12 @@ const PORT = process.env.PORT || 3001;
 // Configuring session
 const sess = {
   secret: process.env.SECRET || "temporary secret",
-  cookie: {},
+  cookie: {
+    // Configures cookie max age to one hour
+    maxAge: 3600000,
+  },
   saveUninitialized: true,
+  resave: true,
   store: new SequelizeStore({
     db: sequelize
   })
@@ -25,8 +29,8 @@ const sess = {
 
 app.use(session(sess));
 
-// Note need to add .create({helpers})
-const hbs = exphbs.create({});
+
+const hbs = exphbs.create({ helpers });
 
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
