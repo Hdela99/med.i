@@ -32,5 +32,11 @@ async function getInteraction(drug) {
       console.log(testArray);
     });
 }
+<<<<<<< HEAD
 //getData();
 getInteraction("orange");
+=======
+getData();
+
+getInteraction("ibuprofen");
+>>>>>>> main
