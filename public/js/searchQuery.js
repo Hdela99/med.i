@@ -4,7 +4,7 @@ const searchHandler = async function (event) {
   getInteraction(queryEl);
   getRoutes(queryEl);
   getAdverseEffects(queryEl);
-  const response = await fetch(`/api/searchQuery`, {
+  await fetch(`/api/Medication`, {
     method: "POST",
     body: JSON.stringify({
       medication_name: queryEl,
