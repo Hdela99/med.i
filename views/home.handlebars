@@ -22,17 +22,16 @@
     <div class="row mx-auto my-auto justify-content-center">
         <h2>Your current medicine cabinet:</h2>
 
-        <div id="rxCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div id="rxCarousel" class="carousel slide d-none d-lg-block " data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
 
                 {{!-- {{#each rxItem}} --}}
                 {{> carousel-item}}
                 {{> carousel-item}}
+                {{> carousel-item}}
+                {{> carousel-item}}
+                {{> carousel-item}}
 
-                {{> carousel-item}}
-                {{> carousel-item}}
-
-                {{> carousel-item}}
 
                 {{!-- {{/each}} --}}
 
@@ -49,7 +48,7 @@
         </div>
 
 
-        <div id="smallContent" class="container-fluid d-flex flex-sm-column ">
+        <div id="smallContent" class="container-fluid d-flex d-lg-none flex-sm-column">
 
 
             {{!-- {{#each rx}} --}}
@@ -61,12 +60,24 @@
 
 
         </div>
+
+        <div id="lowContent" class="container-fluid d-none d-lg-flex justify-content-around p-1">
+
+
+            {{!-- {{#each rx}} --}}
+            {{> rx-cardSM}}
+            {{> rx-cardSM}}
+            {{> rx-cardSM}}
+            {{!-- {{/each}} --}}
+
+
+        </div>
     </div>
 
 <hr>
-    <div>
+    <div class="d-flex justify-content-center">
         <a class="d-flex flex-column align-items-center justify-content-center  text-decoration-none"
-            href="/api/addRx"><img src="./assets/plus.svg" width="80px" class="filter-blue">
+            href="/api/addRx" style="width: fit-content"><img src="./assets/plus.svg" width="80px" class="filter-blue">
             <p class="fs-6 fst-italic text-muted">Add another Rx</p>
         </a>
 
