@@ -10,26 +10,34 @@ async function getData() {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
-      console.log(data.results[0].patient.drug);
+      // console.log(data);
+      brandName = data.results[0].patient.drug[0].medicinalproduct;
+      generic = data.results[0].patient.drug[0].openfda.generic_name;
+      const medObject = {
+        "Generic Name: ": generic,
+        "Brand Name: ": brandName,
+      };
+      console.log("Generic: " + generic.toString());
+      console.log("Brand: " + brandName);
     });
 }
 
 async function getInteraction(drug) {
-  const response = await fetch(
+  await fetch(
     `https://api.fda.gov/drug/label.json?api_key=${APIkey}&search=drug_interactions:${drug}&count=openfda.substance_name.exact`
   )
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      console.log(data.results.length);
-      for (i = 0; i < data.results.length; i++) {
-        console.log(data.results[i].term);
-      }
-      console.log(typeof data.results);
+      let testArray = data.results.map((element) => {
+        return element.term;
+      });
+      console.log(testArray);
     });
 }
-getData();
+//getData();
 
-getInteraction("ibuprofen");
+getInteraction("hydrocodone");
+
+module.exports = { getData, getInteraction };
