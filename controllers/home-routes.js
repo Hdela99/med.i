@@ -1,10 +1,23 @@
 const router = require("express").Router();
-// const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
 // Renders the main page
 
 router.get("/", async (req, res) => {
   try {
+    // const medicineData = await Medicine.findAll({
+    //   order: [['post_date', 'DESC']],
+    //   include: [{
+    //     model: User,
+    //     as: 'user',
+    //     attributes: ['username']
+    //   },
+    //   {
+    //     model: Comment,
+    //   }
+    //   ]
+    // });
+    // const posts = postData.map(post => post.get({ plain: true }));
     res.render("home");
   } catch (err) {
     res.status(500).json(err);

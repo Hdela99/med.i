@@ -14,6 +14,8 @@ const loginHandler = async (event) => {
       alert("Login Failure!");
     }
   }
+  console.log(email)
+  console.log(password)
 };
 document.getElementById("loginForm").addEventListener("submit", loginHandler);
 
