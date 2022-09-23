@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/connection.js");
 
-class Comment extends Model { }
+class Comment extends Model {}
 
 Comment.init(
   {
@@ -19,13 +19,21 @@ Comment.init(
     date_created: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW,
+      // defaultValue: DataTypes.NOW,
     },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
         model: "user",
         key: "id",
+      },
+    },
+    medication_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "medication",
+        key: "id",
+        unique: true,
       },
     },
   },

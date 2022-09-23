@@ -8,7 +8,7 @@ class User extends Model {
   pwVerification(pw) {
     return bcrypt.compareSync(pw, this.password);
   }
-};
+}
 
 User.init(
   {
@@ -17,6 +17,14 @@ User.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+    },
+    first_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    last_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     user_name: {
       type: DataTypes.STRING,
