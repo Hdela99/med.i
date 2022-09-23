@@ -14,7 +14,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 bg-primary text-white">
     <a class="navbar-brand" href="/">Med.i</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav"
       aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,8 @@
 
 
       {{#if loggedIn}}
-      <ul class="d-flex align-content-end">
+      <ul class="d-flex align-content-end  navbar-nav mr-auto mt-2 mt-lg-0">
+       
         <li class="nav-item">
           <a id="logoutBt" class="nav-link" href="#">Logout</a>
 
@@ -44,7 +45,7 @@
         </li>
       </ul>
       {{else}}
-      <ul class="d-flex align-content-end">
+      <ul class="d-flex align-content-end navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
         </li>
