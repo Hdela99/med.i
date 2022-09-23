@@ -3,7 +3,7 @@ const withAuth = require('../utils/auth');
 
 // Renders the main page
 
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
     // const medicineData = await Medicine.findAll({
     //   order: [['post_date', 'DESC']],
@@ -18,7 +18,9 @@ router.get("/", async (req, res) => {
     //   ]
     // });
     // const posts = postData.map(post => post.get({ plain: true }));
-    res.render("home");
+    res.render("home", {
+      loggedIn: req.session.loggedIn
+    });
   } catch (err) {
     res.status(500).json(err);
   }
