@@ -105,3 +105,20 @@ body {
 .carousel-inner .carousel-item-start {
   transform: translateX(0);
 }
+/* 
+@media screen and (max-width:100px) {
+  #smallContent {
+    display: none
+  }
+
+} */
+/* 
+@media screen and (max-width:1440px) {
+  #rxCarousel {
+    display: none
+  } */
+
+  /* #smallContent {
+    display:
+  } */
+/* } */

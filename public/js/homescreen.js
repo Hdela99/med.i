@@ -28,7 +28,7 @@ const main = () => {
 // Configure carousel function to activate only if the screenwidth is >=1400px and if there are 4 or more items;
 if (screen.width >= 1440 && carouselItems.length > 3) {
 
-    removeChildren(smScreenItems);
+    // removeChildren(smScreenItems);
     carouselItems[0].classList.add('active');
 
     carouselItems.forEach((el) => {
@@ -47,7 +47,7 @@ if (screen.width >= 1440 && carouselItems.length > 3) {
     })
 } else {
 
-    removeChildren(carousel);
+    // removeChildren(carousel);
 }
 
 
