@@ -13,13 +13,17 @@ async function getData() {
       // console.log(data);
       brandName = data.results[0].patient.drug[0].medicinalproduct;
       generic = data.results[0].patient.drug[0].openfda.generic_name;
+      const medObject = {
+        "Generic Name: ": generic,
+        "Brand Name: ": brandName,
+      };
       console.log("Generic: " + generic.toString());
       console.log("Brand: " + brandName);
     });
 }
 
 async function getInteraction(drug) {
-  const response = await fetch(
+  await fetch(
     `https://api.fda.gov/drug/label.json?api_key=${APIkey}&search=drug_interactions:${drug}&count=openfda.substance_name.exact`
   )
     .then((response) => {
@@ -32,11 +36,8 @@ async function getInteraction(drug) {
       console.log(testArray);
     });
 }
-<<<<<<< HEAD
 //getData();
-getInteraction("orange");
-=======
-getData();
 
-getInteraction("ibuprofen");
->>>>>>> main
+getInteraction("hydrocodone");
+
+module.exports = { getData, getInteraction };
