@@ -22,14 +22,17 @@
     <div class="row mx-auto my-auto justify-content-center">
         <h2>Your current medicine cabinet:</h2>
 
-        <div id="rxCarousel" class="carousel slide d-none d-xxl-block " data-bs-ride="carousel">
+        <div id="rxCarousel" class="carousel slide d-none d-lg-block " data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
 
                 {{!-- {{#each rxItem}} --}}
                 {{> carousel-item}}
                 {{> carousel-item}}
 
-              
+                {{> carousel-item}}
+                {{> carousel-item}}
+                {{> carousel-item}}
+
 
                 {{!-- {{/each}} --}}
 
@@ -46,7 +49,7 @@
         </div>
 
 
-        <div id="smallContent" class="container-fluid d-flex d-xxl-none flex-sm-column">
+        <div id="smallContent" class="container-fluid d-flex d-lg-none flex-sm-column">
 
 
             {{!-- {{#each rx}} --}}
@@ -59,11 +62,10 @@
 
         </div>
 
-        <div id="lowContent" class="container-fluid d-none d-xxl-flex flex-sm-column">
+        <div id="lowContent" class="container-fluid d-none d-lg-flex justify-content-around p-1">
 
 
             {{!-- {{#each rx}} --}}
-            {{> rx-cardSM}}
             {{> rx-cardSM}}
             {{> rx-cardSM}}
             {{> rx-cardSM}}

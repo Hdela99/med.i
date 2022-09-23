@@ -5,6 +5,7 @@ const intro = document.querySelector("#intro");
 const carousel = document.querySelector("#rxCarousel")
 const carouselItems = document.querySelectorAll('.carousel .carousel-item')
 const smScreenItems = document.querySelector("#smallContent")
+const lowRxQtyItems = document.querySelector("#lowContent")
 
 
 const renderIntro = () => {
@@ -25,11 +26,23 @@ const main = () => {
     }
 }
 
-// Configure carousel function to activate only if the screenwidth is >=1400px and if there are 4 or more items;
+// Configure carousel function to activate only if there are 4 or more items;
 if (carouselItems.length > 3) {
+    
+    // Removes the HTML that handles the low quantity
+    removeChildren(lowRxQtyItems);
 
+
+    // Reformats classes due to carousel requiring different responsive display classes, updates smScreenItems to accomodate
+    carousel.classList.add('d-xxl-block');
+    carousel.classList.remove('d-lg-block');
+    smScreenItems.classList.add('d-xxl-none');
+    smScreenItems.classList.remove('d-lg-none');
+
+    // Enables the carousel to display
     carouselItems[0].classList.add('active');
 
+    // Handles the content scrolling
     carouselItems.forEach((el) => {
 
         let minPerSlide = 4
@@ -46,7 +59,7 @@ if (carouselItems.length > 3) {
     })
 } else {
 
-    removeChildren(smScreenItems);
+    removeChildren(carousel);
 }
 
 
