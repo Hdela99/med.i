@@ -9,6 +9,7 @@ router.post('/', async (req, res) => {
       user_name: req.body.user_name,
       email: req.body.email,
       password: req.body.password
+      
     });
 
     req.session.save(() => {
