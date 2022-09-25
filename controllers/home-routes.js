@@ -1,11 +1,26 @@
 const router = require("express").Router();
-// const withAuth = require('../utils/auth');
+const withAuth = require('../utils/auth');
 
 // Renders the main page
 
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
-    res.render("home");
+    // const medicineData = await Medicine.findAll({
+    //   order: [['post_date', 'DESC']],
+    //   include: [{
+    //     model: User,
+    //     as: 'user',
+    //     attributes: ['username']
+    //   },
+    //   {
+    //     model: Comment,
+    //   }
+    //   ]
+    // });
+    // const posts = postData.map(post => post.get({ plain: true }));
+    res.render("home", {
+      loggedIn: req.session.loggedIn
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -27,25 +42,31 @@ router.get("/signup", async (req, res) => {
   }
 });
 
-router.get("/search", async (req, res) => {
+router.get("/search", withAuth, async (req, res) => {
   try {
-    res.render("search");
+    res.render("search", {
+      loggedIn: req.session.loggedIn
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get("/results", async (req, res) => {
+router.get("/results", withAuth, async (req, res) => {
   try {
-    res.render("results");
+    res.render("results", {
+      loggedIn: req.session.loggedIn
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get("/alerts", async (req, res) => {
+router.get("/alerts", withAuth, async (req, res) => {
   try {
-    res.render("alerts");
+    res.render("alerts", {
+      loggedIn: req.session.loggedIn
+    });
   } catch (err) {
     res.status(500).json(err);
   }

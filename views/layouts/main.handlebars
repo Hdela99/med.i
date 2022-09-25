@@ -33,26 +33,25 @@
           <a class="nav-link" href="/alerts">Alerts</a>
         </li>
       </ul>
-
-
-      {{#if loggedIn}}
-      <ul class="d-flex align-content-end  navbar-nav mr-auto mt-2 mt-lg-0">
-       
-        <li class="nav-item">
-          <a id="logoutBt" class="nav-link" href="#">Logout</a>
-
-          <script src="../js/logout.js"></script>
-        </li>
-      </ul>
-      {{else}}
-      <ul class="d-flex align-content-end navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
-      </ul>
-      {{/if}}
-
     </div>
+
+    {{#if loggedIn}}
+    <ul class="d-flex navbar-nav align-content-end ">
+      <li class="nav-item">
+        <a id="logoutBt" class="nav-link" href="#">Logout</a>
+
+        <script src="../js/logout.js"></script>
+      </li>
+    </ul>
+    {{else}}
+    <ul class="d-flex navbar-nav align-content-end">
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+    </ul>
+    {{/if}}
+
+
 
   </nav>
 
