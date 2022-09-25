@@ -17,7 +17,7 @@ UserMedication.init(
       references: {
         model: "user",
         key: "id",
-        unique: true,
+        unique: false,
       },
     },
     medication_id: {
@@ -25,7 +25,7 @@ UserMedication.init(
       references: {
         model: "medication",
         key: "id",
-        unique: true,
+        unique: false,
       },
     },
   },

@@ -17,9 +17,15 @@ const seedDatabase = async () => {
     await Comment.create({
       ...comment,
       user_id: users[Math.floor(Math.random() * users.length)].id,
-    })
-  };
+    });
 
+    // for (const medication of medicationData) {
+    //   await Medication.create({
+    //     ...medication,
+    //     user_id: users[Math.floor(Math.random() * users.length)].id,
+    //   });
+    // }
+  }
 };
 
 seedDatabase();
