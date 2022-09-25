@@ -3,6 +3,8 @@ const { Medication, User } = require("../../models");
 
 router.post("/", (req, res) => {
   //new medication search
+  console.log("----------------------");
+  console.log(req.body);
   Medication.create({
     medication_name: req.body.medication_name,
     adverse_effects: req.body.adverse_effects,

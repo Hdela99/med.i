@@ -17,11 +17,11 @@ Medication.init(
       allowNull: false,
     },
     adverse_effects: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY,
       allowNull: false,
     },
     route_of_medication: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY,
       allowNull: false,
     },
   },

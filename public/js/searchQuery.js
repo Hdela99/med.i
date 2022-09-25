@@ -1,23 +1,31 @@
 const searchHandler = async function (event) {
   event.preventDefault();
-  const queryEl = document.querySelector("#search-input").value.trim();
-  getInteraction(queryEl);
-  getRoutes(queryEl);
-  getAdverseEffects(queryEl);
-  await fetch(`/api/Medication`, {
+  const query = document.querySelector("#search-input").value.trim();
+  // getInteraction(query);
+  // getRoutes(query);
+  const routeArray = await getRoutes(query);
+  const effectArray = await getAdverseEffects(query);
+  console.log(effectArray);
+  console.log(routeArray);
+  await fetch(`/api/search-routes`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
-      medication_name: queryEl,
+      medication_name: query,
       adverse_effects: effectArray,
       route_of_medication: routeArray,
     }),
   });
-  return queryEl;
+  return query;
 };
 
 document.querySelector("#findRx").addEventListener("submit", searchHandler);
 
 async function getInteraction(drug) {
+  let mainArray = [];
+  console.log(drug);
   await fetch(
     `https://api.fda.gov/drug/label.json?&search=drug_interactions:${drug}&count=openfda.substance_name.exact`
   )
@@ -29,12 +37,15 @@ async function getInteraction(drug) {
         return element.term;
       });
       console.log(testArray);
+      mainArray = testArray;
       return testArray; //returns array of each medicine that were reported to have adverse effects, maybe lets do the first 10-15 to not have a super long list.
     });
+  return mainArray;
 }
 
 async function getRoutes(drug) {
   //returns an array of methods of medication IE oral
+  let mainArray = [];
   await fetch(
     `https://api.fda.gov/drug/label.json?search=${drug}&count=openfda.route.exact`
   )
@@ -46,12 +57,16 @@ async function getRoutes(drug) {
         return element.term;
       });
       console.log(routeArray);
+      mainArray = routeArray;
       return routeArray;
     });
+
+  return mainArray;
 }
 
 async function getAdverseEffects(drug) {
   //returns an array adverse effects. We should discuss how many we want to show the user.
+  let mainArray = [];
   await fetch(
     `https://api.fda.gov/drug/event.json?search=${drug}&count=patient.reaction.reactionmeddrapt.exact`
   )
@@ -63,6 +78,8 @@ async function getAdverseEffects(drug) {
         return element.term;
       });
       console.log(effectArray);
+      mainArray = effectArray;
       return effectArray;
     });
+  return mainArray;
 }
