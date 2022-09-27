@@ -15,6 +15,15 @@
     </div>
 </div>
 
+{{#if alerts}}
+
+{{> alert-modal}}
+
+{{else}}
+{{> alert-modal}}
+
+
+{{/if}}
 
 <div id="rxCabinet">
 
@@ -74,10 +83,10 @@
         </div>
     </div>
 
-<hr>
+    <hr>
     <div class="d-flex justify-content-center">
-        <a class="d-flex flex-column align-items-center justify-content-center text-decoration-none"
-            href="/search" style="width: fit-content"><img src="./assets/plus.svg" width="80px" class="filter-blue">
+        <a class="d-flex flex-column align-items-center justify-content-center text-decoration-none" href="/search"
+            style="width: fit-content"><img src="./assets/plus.svg" width="80px" class="filter-blue">
             <p class="fs-6 fst-italic text-muted">Add another Rx</p>
         </a>
 
@@ -87,6 +96,5 @@
 
 
 
-{{> alert-modal}}
 
 <script src="./js/homescreen.js"></script>
