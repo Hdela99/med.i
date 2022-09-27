@@ -8,6 +8,12 @@ body {
 
 }
 
+.filter-white {
+  filter: invert(89%) sepia(70%) saturate(0%) hue-rotate(352deg) brightness(104%) contrast(101%);
+
+
+}
+
 /* Custom CSS for intro screen */
 #intro {
   opacity: 0;
