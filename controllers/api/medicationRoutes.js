@@ -12,12 +12,42 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+//THIS WORKS 09/27/22 gets the med name that is posted in searchQuery.js line 13
+router.get('/medName', async (req,res) => {
+  try {
+    const medData = await Medication.findAll({
+      attributes: {exclude: ['id', 'adverse_effects', 'route_of_medication']},
+      order: [['medication_name', 'DESC']]});
+    console.log("TRYING TO SHOW MEDNAME -----------");
+    let medName = JSON.stringify(req.body.medication_name);
+    console.log(medName);
+    console.log(req.body.medication_name);
+    console.log("you found medName")
+    res.status(200).json(medData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+//Not finalized yet 9/27/22 146pm
+router.post('/medName', async (req,res) => {
+  const newMedName = await Medication.create(req.body);
+  const drugName = req.body.medication_name;
+  const effURL = `https://api.fda.gov/drug/event.json?api_key=${apiKey}&search=${drugName}&count=patient.reaction.reactionmeddrapt.exact&limit=8`;
+  const routesURL =  `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=${drugName}&count=openfda.route.exact&limit=7`;
+  const drugIntURL = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=drug_interactions:${drugName}&count=openfda.substance_name.exact&limit=10`;
+  try{
+    console.log(drugName);
+    res.status(200).json(drugName);
+  }catch(err) {
+    res.status(500).json(err);
+  }
+})
 
 router.post("/", async (req, res) => {
   const drugName = req.body.medication_name;
   const effURL = `https://api.fda.gov/drug/event.json?api_key=${apiKey}&search=${drugName}&count=patient.reaction.reactionmeddrapt.exact&limit=8`;
-  const routesURL =  `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=${drugName}&count=openfda.route.exact`;
-  const drugIntURL = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=drug_interactions:${drugName}&count=openfda.substance_name.exact`;
+  const routesURL =  `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=${drugName}&count=openfda.route.exact&limit=7`;
+  const drugIntURL = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=drug_interactions:${drugName}&count=openfda.substance_name.exact&limit=10`;
 
   const newMed = await Medication.create({
     medication_name: req.body.medication_name,

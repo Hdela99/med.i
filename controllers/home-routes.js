@@ -57,7 +57,7 @@ router.get("/signup", async (req, res) => {
 //   }
 // });
 
-/* router.get("/search", async (req, res) => {
+router.get("/search", async (req, res) => {
   try {
     // FE JS takes the input queries, processes using the search-routes we have established
     let drug = req.body.drug;
@@ -81,7 +81,7 @@ router.get("/signup", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-}); */
+});
 //NEEDS WITHAUTH
 
 router.get("/results", async (req, res) => {

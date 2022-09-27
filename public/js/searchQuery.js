@@ -10,18 +10,21 @@ const searchHandler = async function (event) {
    console.log("----------- ROUTE " + typeof route_of_medication);
   console.log(effectArray);
   console.log(routeArray);
-  const response = await fetch('/api/medication', {
+  const response = await fetch('/api/medication/medName', {
+
     method: "POST",
     body: JSON.stringify({
       medication_name: query,
-      adverse_effects: adverse_effects,
-      route_of_medication: route_of_medication,
+      // adverse_effects: adverse_effects,
+      // route_of_medication: route_of_medication,
     }),
     headers: {
       "Content-Type": "application/json"
     },
   });
   if(response.ok){
+
+    console.log(query);
     console.log("Somehow got it to enter!");
   }else {
     alert("Failed to send to medication url");
@@ -86,7 +89,6 @@ async function getAdverseEffects(drug) {
         return element.term;
       });
       mainArray = effectArray;
-      console.log(mainArray);//THIS WORKS
       return effectArray;
     });
   return mainArray;
