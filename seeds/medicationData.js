@@ -18,7 +18,7 @@ const medicationData = [
   },
   {
     medication_name: "wine",
-    adverse_effects: "people are less annoying",
+    adverse_effects: "people are more annoying",
     route_of_medication: "anyway you can get it",
   },
   {
