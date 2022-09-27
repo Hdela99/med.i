@@ -72,6 +72,18 @@ router.get("/alerts", withAuth, async (req, res) => {
   }
 });
 
+
+router.get("/COMMENTTEST", async (req, res) => {
+  try {
+    res.render("rx", {
+      // loggedIn: req.session.loggedIn
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 // View specific drug
 // router.get('/drug/:id', withAuth, async (req, res) => {
 //     try {
