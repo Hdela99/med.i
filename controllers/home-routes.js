@@ -64,6 +64,7 @@ router.get("/results", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 //NEEDS WITHAUTH
 router.get("/alerts", async (req, res) => {
   try {
