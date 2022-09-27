@@ -1,9 +1,36 @@
 const router = require("express").Router();
 const { Medication, User } = require("../../models");
 require("dotenv").config();
-const apiKey = process.env.API_KEY;
+//const apiKey = process.env.API_KEY;
 
-router.post("/", (req, res) => {
+router.get("/", (req, res) => {
+  try {
+    const searchData = await Medication.findAll({
+      include: [
+        {
+          model: User,
+          attributes: [
+            "id",
+            "medication_name",
+            "adverse_effects",
+            "route_of_medication",
+          ],
+        },
+      ],
+    });
+    const meds = searchData.map((med) => med.get({ plain: true }));
+
+    res.render("rx-result", {
+      meds,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+router.post("/:id", (req, res) => {
   //new medication search
   console.log("----------------------");
   console.log(req.body);
@@ -83,4 +110,3 @@ async function getAdverseEffects(drug) {
 }
 
 module.exports = router;
-module.exports = { getInteraction, getRoutes, getAdverseEffects };
