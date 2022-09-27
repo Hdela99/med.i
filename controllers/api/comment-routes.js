@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 //GET one Comment
-router.get("/:id", withAuth, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     //the comment that is received should be linked the medication that the comment refers to......how do I do that?
     const commentData = await Comment.findByPk(req.params.id);
@@ -27,7 +27,7 @@ router.get("/:id", withAuth, async (req, res) => {
 });
 
 //POST route Comment
-router.post("/", withAuth, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const commentData = await Comment.Create(req.body.comment, {
       where: {
@@ -43,7 +43,7 @@ router.post("/", withAuth, async (req, res) => {
 });
 
 //PUT route Comment
-router.put("/:id", withAuth, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const commentData = await Comment.update(req.body, {
       where: {
@@ -63,7 +63,17 @@ router.put("/:id", withAuth, async (req, res) => {
 });
 
 //DELETE route Comment
-router.delete("/:id", withAuth, async (req, res) => {
+router.delete("/:id", async (req, res) => {
+  //this makes sure the User deleting the comment is the User that created it
+  const comment = await Comment.findByPk(req.params.id);
+
+  if (req.session.userID !== comment.user_id) {
+    res.status(403).json({
+      message: "you cannot delete that comment beacuse it is not yours!",
+    });
+    return;
+  }
+
   try {
     const commentData = await Comment.destroy({
       where: {
