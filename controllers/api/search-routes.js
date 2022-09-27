@@ -1,9 +1,11 @@
 const router = require("express").Router();
 const { Medication, User } = require("../../models");
 require("dotenv").config();
-//const apiKey = process.env.API_KEY;
+const fetch = require('node-fetch');
+const apiKey = process.env.API_KEY;
 
-router.get("/", (req, res) => {
+// Gets all medications from the DB
+router.get("/", async (req, res) => {
   try {
     const searchData = await Medication.findAll({
       include: [
@@ -30,83 +32,105 @@ router.get("/", (req, res) => {
 });
 
 
-router.post("/:id", (req, res) => {
+router.post("/", async (req, res) => {
   //new medication search
-  console.log("----------------------");
-  console.log(req.body);
-  Medication.create({
-    medication_name: req.body.medication_name,
-    adverse_effects: req.body.adverse_effects,
-    route_of_medication: req.body.route_of_medication,
-  }).then((medData) => {
-    req.session.save(() => {
-      req.session.medication_name = medData.medication_name;
-      req.session.adverse_effects = medData.adverse_effects;
-      req.session.route_of_medication = medData.route_of_medication;
-      res.status(200).json(medData);
+  try {
+    const mediResponse = await Medication.create({
+      medication_name: req.body.medication_name,
+      adverse_effects: req.body.adverse_effects,
+      route_of_medication: req.body.route_of_medication,
     });
-  });
+
+    res.status(200).json(`Successfully submitted information!`)
+
+  } catch (err) {
+    res.status(500).json(err)
+
+  }
+
+
+
+
+  // console.log("----------------------");
+  // console.log(req.body);
+  // Medication.create({
+  //   medication_name: req.body.medication_name,
+  //   adverse_effects: req.body.adverse_effects,
+  //   route_of_medication: req.body.route_of_medication,
+  // }).then((medData) => {
+  //   req.session.save(() => {
+  //     req.session.medication_name = medData.medication_name;
+  //     req.session.adverse_effects = medData.adverse_effects;
+  //     req.session.route_of_medication = medData.route_of_medication;
+  //     res.status(200).json(medData);
+  //   });
+  // });
 });
 
-async function getInteraction(drug) {
-  let mainArray = [];
-  console.log(drug);
-  await fetch(
-    `https://api.fda.gov/drug/label.json?&search=drug_interactions:${drug}&count=openfda.substance_name.exact`
-  )
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      let testArray = data.results.map((element) => {
-        return element.term;
-      });
-      console.log(testArray);
-      mainArray = testArray;
-      return testArray; //returns array of each medicine that were reported to have adverse effects, maybe lets do the first 10-15 to not have a super long list.
-    });
-  return mainArray;
-}
+// TEST ROUTE THIS SHOULD BE DELETED LATER
+router.get("/test", async (req, res) => {
+  try {
+    let drug = req.body.drug;
+    let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:ibuprofen`
+    // let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:${drug}`
 
-async function getRoutes(drug) {
-  //returns an array of methods of medication IE oral
-  let mainArray = [];
-  await fetch(
-    `https://api.fda.gov/drug/label.json?search=${drug}&count=openfda.route.exact`
-  )
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      let routeArray = data.results.map((element) => {
-        return element.term;
-      });
-      console.log(routeArray);
-      mainArray = routeArray;
-      return routeArray;
-    });
+    const drugFx = await fetch(url).then(res => { return res.json(); })
+    console.log(drugFx)
+   
+    res.status(200).json(drugFx)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
 
-  return mainArray;
-}
-
-async function getAdverseEffects(drug) {
-  //returns an array adverse effects. We should discuss how many we want to show the user.
-  let mainArray = [];
-  await fetch(
-    `https://api.fda.gov/drug/event.json?search=${drug}&count=patient.reaction.reactionmeddrapt.exact`
-  )
-    .then((response) => {
-      return response.json();
+// The drug route is used to pull drug interactions from the openFDA database
+router.get("/interactions", async (req, res) => {
+  try {
+    let drug = req.body.drug;
+    let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=drug_interactions:${drug}&count=openfda.substance_name.exact&limit=10`;
+    const drugInteractions = await fetch(url).then(res => { return res.json(); })
+    let drugIArr = drugInteractions.results.map((element) => {
+      return element.term;
     })
-    .then((data) => {
-      let effectArray = data.results.map((element) => {
-        return element.term;
-      });
-      console.log(effectArray);
-      mainArray = effectArray;
-      return effectArray;
-    });
-  return mainArray;
-}
+
+    res.status(200).json(drugIArr)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
+
+// This route finds all routes of intake for the drug
+router.get("/routes", async (req, res) => {
+  try {
+    let drug = req.body.drug;
+    let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=${drug}&count=openfda.route.exact&limit=10`
+
+    const drugRoute = await fetch(url).then(res => { return res.json(); })
+    console.log(drugRoute)
+    let drugRouteArr = drugRoute.results.map((element) => {
+      return element.term;
+    })
+    res.status(200).json(drugRouteArr)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
+
+
+// This route gets adverse effects for the user to know issues with taking the medication
+router.get("/effects", async (req, res) => {
+  try {
+    let drug = req.body.drug;
+    let url = `https://api.fda.gov/drug/event.json?api_key=${apiKey}&search=${drug}&count=patient.reaction.reactionmeddrapt.exact&limit=10`
+
+    const drugFx = await fetch(url).then(res => { return res.json(); })
+    let drugFxArr = drugFx.results.map((element) => {
+      return element.term;
+    })
+    res.status(200).json(drugFxArr)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
 
 module.exports = router;
