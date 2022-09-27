@@ -1,13 +1,11 @@
 const searchHandler = async function (event) {
   event.preventDefault();
   const query = document.querySelector("#search-input").value.trim();
-  // getInteraction(query);
-  // getRoutes(query);
   const routeArray = await getRoutes(query);
   const effectArray = await getAdverseEffects(query);
   console.log(effectArray);
   console.log(routeArray);
-  await fetch(`/api/search`, {
+  /* await fetch(`/api/search`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,8 +14,8 @@ const searchHandler = async function (event) {
       medication_name: query,
       adverse_effects: effectArray,
       route_of_medication: routeArray,
-    }),
-  });
+    }), 
+  });*/
   return query;
 };
 
@@ -56,7 +54,6 @@ async function getRoutes(drug) {
       let routeArray = data.results.map((element) => {
         return element.term;
       });
-      console.log(routeArray);
       mainArray = routeArray;
       return routeArray;
     });
@@ -68,7 +65,7 @@ async function getAdverseEffects(drug) {
   //returns an array adverse effects. We should discuss how many we want to show the user.
   let mainArray = [];
   await fetch(
-    `https://api.fda.gov/drug/event.json?search=${drug}&count=patient.reaction.reactionmeddrapt.exact`
+    `https://api.fda.gov/drug/event.json?search=${drug}&count=patient.reaction.reactionmeddrapt.exact&limit=10`
   )
     .then((response) => {
       return response.json();
@@ -77,7 +74,6 @@ async function getAdverseEffects(drug) {
       let effectArray = data.results.map((element) => {
         return element.term;
       });
-      console.log(effectArray);
       mainArray = effectArray;
       return effectArray;
     });
