@@ -1,9 +1,10 @@
 const router = require("express").Router();
-const withAuth = require('../utils/auth');
+const withAuth = require("../utils/auth");
 
 // Renders the main page
+//NEEDS WITHAUTH
 
-router.get("/", withAuth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     // const medicineData = await Medicine.findAll({
     //   order: [['post_date', 'DESC']],
@@ -19,7 +20,7 @@ router.get("/", withAuth, async (req, res) => {
     // });
     // const posts = postData.map(post => post.get({ plain: true }));
     res.render("home", {
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -41,31 +42,34 @@ router.get("/signup", async (req, res) => {
     res.status(500).json(err);
   }
 });
+//NEEDS WITHAUTH
 
-router.get("/search", withAuth, async (req, res) => {
+router.get("/search", async (req, res) => {
   try {
     res.render("search", {
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+//NEEDS WITHAUTH
 
-router.get("/results", withAuth, async (req, res) => {
+router.get("/results", async (req, res) => {
   try {
     res.render("results", {
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get("/alerts", withAuth, async (req, res) => {
+//NEEDS WITHAUTH
+router.get("/alerts", async (req, res) => {
   try {
     res.render("alerts", {
-      loggedIn: req.session.loggedIn
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     res.status(500).json(err);
