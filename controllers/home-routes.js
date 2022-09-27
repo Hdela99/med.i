@@ -57,7 +57,7 @@ router.get("/signup", async (req, res) => {
 //   }
 // });
 
-router.get("/search", async (req, res) => {
+/* router.get("/search", async (req, res) => {
   try {
     // FE JS takes the input queries, processes using the search-routes we have established
     let drug = req.body.drug;
@@ -71,9 +71,8 @@ router.get("/search", async (req, res) => {
     //   return element.term;
     // });
 
-
-    let drugFxArr = drugFx.results
-    console.log(drugFxArr)
+    let drugFxArr = drugFx.results;
+    console.log(drugFxArr);
     // Passes it to the res.render for whatever our results should look like
     res.render("search", {
       drugFxArr,
@@ -82,7 +81,7 @@ router.get("/search", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-});
+}); */
 //NEEDS WITHAUTH
 
 router.get("/results", async (req, res) => {
@@ -106,7 +105,6 @@ router.get("/alerts", async (req, res) => {
   }
 });
 
-
 router.get("/COMMENTTEST", async (req, res) => {
   try {
     res.render("rx", {
@@ -116,7 +114,6 @@ router.get("/COMMENTTEST", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 // View specific drug
 // router.get('/drug/:id', withAuth, async (req, res) => {

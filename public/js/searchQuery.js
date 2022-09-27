@@ -1,21 +1,31 @@
 const searchHandler = async function (event) {
   event.preventDefault();
   const query = document.querySelector("#search-input").value.trim();
+  console.log(query);
   const routeArray = await getRoutes(query);
   const effectArray = await getAdverseEffects(query);
+   let adverse_effects = effectArray.toString();
+   console.log("ADVERSE TYPE: " + typeof adverse_effects);
+   let route_of_medication = routeArray.toString();
+   console.log("----------- ROUTE " + typeof route_of_medication);
   console.log(effectArray);
   console.log(routeArray);
-  /* await fetch(`/api/search`, {
+  const response = await fetch('/api/medication', {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify({
       medication_name: query,
-      adverse_effects: effectArray,
-      route_of_medication: routeArray,
-    }), 
-  });*/
+      adverse_effects: adverse_effects,
+      route_of_medication: route_of_medication,
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    },
+  });
+  if(response.ok){
+    console.log("Somehow got it to enter!");
+  }else {
+    alert("Failed to send to medication url");
+  } 
   return query;
 };
 
@@ -25,7 +35,7 @@ async function getInteraction(drug) {
   let mainArray = [];
   console.log(drug);
   await fetch(
-    `https://api.fda.gov/drug/label.json?&search=drug_interactions:${drug}&count=openfda.substance_name.exact`
+    `https://api.fda.gov/drug/label.json?&search=drug_interactions:${drug}&count=openfda.substance_name.exact&limit=10`
   )
     .then((response) => {
       return response.json();
@@ -45,7 +55,7 @@ async function getRoutes(drug) {
   //returns an array of methods of medication IE oral
   let mainArray = [];
   await fetch(
-    `https://api.fda.gov/drug/label.json?search=${drug}&count=openfda.route.exact`
+    `https://api.fda.gov/drug/label.json?search=${drug}&count=openfda.route.exact&limit=5`
   )
     .then((response) => {
       return response.json();
@@ -55,6 +65,7 @@ async function getRoutes(drug) {
         return element.term;
       });
       mainArray = routeArray;
+      // console.log(mainArray); //THIS WORKS
       return routeArray;
     });
 
@@ -65,7 +76,7 @@ async function getAdverseEffects(drug) {
   //returns an array adverse effects. We should discuss how many we want to show the user.
   let mainArray = [];
   await fetch(
-    `https://api.fda.gov/drug/event.json?search=${drug}&count=patient.reaction.reactionmeddrapt.exact&limit=10`
+    `https://api.fda.gov/drug/event.json?search=${drug}&count=patient.reaction.reactionmeddrapt.exact&limit=8`
   )
     .then((response) => {
       return response.json();
@@ -75,6 +86,7 @@ async function getAdverseEffects(drug) {
         return element.term;
       });
       mainArray = effectArray;
+      console.log(mainArray);//THIS WORKS
       return effectArray;
     });
   return mainArray;

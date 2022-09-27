@@ -7,13 +7,7 @@ const apiKey = process.env.API_KEY;
 // Gets all medications from the DB
 router.get("/", async (req, res) => {
   try {
-    const searchData = await Medication.findAll({
-      // include: [
-      //   {
-      //     model: User,
-      //   },
-      // ],
-    });
+    const searchData = await Medication.findAll();
     // const meds = searchData.map((med) => med.get({ plain: true }));
     // console.log(meds);
     res.status(200).json(searchData);
@@ -50,7 +44,7 @@ router.get("/test", async (req, res) => {
     const drugFx = await fetch(url).then((res) => {
       return res.json();
     });
-    console.log(drugFx);
+    console.log(drugFx.results[0].clinical_pharmacology);
 
     res.status(200).json(drugFx);
   } catch (err) {
