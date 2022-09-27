@@ -15,8 +15,12 @@ router.get("/", async (req, res) => {
       // ],
     });
     // const meds = searchData.map((med) => med.get({ plain: true }));
-    console.log("potato");
-    res.json(searchData);
+    // console.log(meds);
+    res.status(200).json(searchData);
+    // res.render("rx-result", {
+    //   meds,
+    //   loggedIn: req.session.loggedIn,
+    // });
   } catch (err) {
     res.status(500).json(err);
   }
