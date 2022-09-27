@@ -71,8 +71,7 @@ router.post("/", async (req, res) => {
 router.get("/test", async (req, res) => {
   try {
     let drug = req.body.drug;
-    let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:ibuprofen`
-    // let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:${drug}`
+    let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:${drug}`
 
     const drugFx = await fetch(url).then(res => { return res.json(); })
     console.log(drugFx)
