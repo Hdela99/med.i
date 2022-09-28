@@ -64,7 +64,7 @@ router.get("/search/:drug", withAuth, async (req, res) => {
 
   const drugFxObj = { ...drugFx.results[0] };
 
-// Instantiating variables for tests on whether a specific property exists in openFDA API
+  // Instantiating variables for tests on whether a specific property exists in openFDA API
   let route, generic_name, adverse_reactions, product_type, clinical_pharmacology, drug_interactions, description;
   let routeTest = drugFxObj.openfda.route;
   let nameTest = drugFxObj.openfda.generic_name
@@ -81,13 +81,13 @@ router.get("/search/:drug", withAuth, async (req, res) => {
   } else {
     route = drugFxObj.openfda.route[0]
   }
-  
+
   if (nameTest == undefined) {
     generic_name = "N/A"
   } else {
     generic_name = drugFxObj.openfda.generic_name[0]
   }
-  
+
   if (reactionsTest == undefined) {
     adverse_reactions = "N/A"
   } else {
@@ -111,7 +111,7 @@ router.get("/search/:drug", withAuth, async (req, res) => {
   } else {
     drug_interactions = drugFxObj.drug_interactions[0]
   }
-  
+
   if (descriptionTest == undefined) {
     description = "N/A"
   } else {
@@ -140,6 +140,7 @@ router.get("/search/:drug", withAuth, async (req, res) => {
 router.get("/alerts", async (req, res) => {
   try {
     let alertsArr = [];
+    let alerts = [];
     const userData = await User.findByPk(req.session.userID, {
       include: [{ model: Medication, through: UserMedication }]
     });
@@ -158,32 +159,22 @@ router.get("/alerts", async (req, res) => {
       })
     )
 
-    console.log(alertsArr[0].results)
 
-    // const recalledDrugs = alertsArr.forEach(element => )
+    let formattedAlerts = alertsArr.map(element => element.results[0])
+    
+    formattedAlerts.forEach((el) => {
+      let neededInfo = {
+        code_info: el.code_info,
+        recall_number: el.recall_number,
+        generic_name: el.openfda.generic_name[0],
+      }
+      alerts.push(neededInfo);
+    })
 
-
-    // userMeds.forEach(async (element, index) => {
-    //   try {
-    //     const url = `https://api.fda.gov/drug/enforcement.json?api_key=${process.env.API_KEY}&search=openfda.generic_name:"${element}"`
-    //     const alertResponse = await fetch(url)
-
-
-    //     if (alertResponse.ok) {
-    //       alertsArr.push(alertResponse)
-    //     } 
-    //     console.log(alertsArr)
-
-    //   } catch (err) {
-    //     console.log(err)
-    //   }
-
-    //   console.log(`--------------${index}----------`)
-    // })
-
-
+    console.log(alerts)
 
     res.render("alerts", {
+      alerts,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
