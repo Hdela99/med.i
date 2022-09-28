@@ -18,12 +18,15 @@ Medication.init(
     },
     adverse_effects: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: "FXholder",
     },
     route_of_medication: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: "routeHolder",
     },
+
   },
   {
     sequelize,
