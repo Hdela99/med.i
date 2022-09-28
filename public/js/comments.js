@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const commentHandler = async (event) => {
   console.log("clicked");
   // event.preventDefault();
@@ -20,3 +21,16 @@ document.querySelector("#tacocat").addEventListener("submit", (event) => {
   commentHandler(event);
 });
 //send to backend after capture as object
+=======
+
+
+
+const commentHandler = async (event) => {
+  event.preventDefault();
+  const title = document.getElementsByClassName(commentTitle).value;
+  const body = document.getElementsByClassName(commentContents).value;
+  if (title && body) {
+    const commentInfo = post("")
+  }
+};
+>>>>>>> e62ac52fdd47b6dd9d10cab5f20a7193616b0d15
