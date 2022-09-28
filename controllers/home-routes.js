@@ -5,7 +5,7 @@ const { Medication, User, Comment, UserMedication } = require('../models');
 // Renders the main page
 //NEEDS WITHAUTH
 
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
     console.log(req.session.userID);
     const personalMedicine = await User.findByPk(req.session.userID, {

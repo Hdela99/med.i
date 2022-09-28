@@ -108,4 +108,27 @@ router.get("/effects", async (req, res) => {
   }
 });
 
+
+
+// This route gets recalls
+router.get("/recall", async (req, res) => {
+  try {
+    let drugname = req.body.drug || "Dexmedetomidine";
+    let url = `https://api.fda.gov/drug/enforcement.json?search=product_description:${drugname}`
+
+    const recalls = await fetch(url).then((res) => {
+      return res.json();
+    })
+
+    const recallsObj = recalls.results
+    console.log(recallsObj)
+
+    res.status(200).json(recallsObj)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+  
+
+})
+
 module.exports = router;
