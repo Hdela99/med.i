@@ -137,7 +137,7 @@ router.get("/search/:drug", withAuth, async (req, res) => {
 
 
 //NEEDS WITHAUTH
-router.get("/alerts", async (req, res) => {
+router.get("/alerts", withAuth, async (req, res) => {
   try {
     let alertsArr = [];
     let alerts = [];
@@ -184,7 +184,7 @@ router.get("/alerts", async (req, res) => {
 
 
 // View specific drug
-router.get('/drug/:id', async (req, res) => {
+router.get('/drug/:id', withAuth, async (req, res) => {
   try {
 
 
