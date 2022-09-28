@@ -7,20 +7,15 @@ const apiKey = process.env.API_KEY;
 // Gets all medications from the DB
 router.get("/", async (req, res) => {
   try {
-    const searchData = await Medication.findAll({
-      // include: [
-      //   {
-      //     model: User,
-      //   },
-      // ],
+    let drug = req.body.drug;
+    let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:${drug}`;
+
+    const drugFx = await fetch(url).then((res) => {
+      return res.json();
     });
-    // const meds = searchData.map((med) => med.get({ plain: true }));
-    // console.log(meds);
-    res.status(200).json(searchData);
-    // res.render("rx-result", {
-    //   meds,
-    //   loggedIn: req.session.loggedIn,
-    // });
+    console.log(drugFx);
+
+    res.status(200).json(drugFx);
   } catch (err) {
     res.status(500).json(err);
   }

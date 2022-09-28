@@ -1,25 +1,23 @@
 const router = require("express").Router();
 const withAuth = require("../utils/auth");
+const { Medication, User, Comment, UserMedication } = require('../models');
 
 // Renders the main page
 //NEEDS WITHAUTH
 
 router.get("/", async (req, res) => {
   try {
-    // const medicineData = await Medicine.findAll({
-    //   order: [['post_date', 'DESC']],
-    //   include: [{
-    //     model: User,
-    //     as: 'user',
-    //     attributes: ['username']
-    //   },
-    //   {
-    //     model: Comment,
-    //   }
-    //   ]
-    // });
-    // const posts = postData.map(post => post.get({ plain: true }));
+    console.log(req.session.userID);
+    const personalMedicine = await User.findByPk(req.session.userID, {
+      include: [{
+        model: Medication,
+        through: UserMedication
+      }]
+    });
+    const pMedicine = personalMedicine.medications.map(rx => rx.get({ plain: true }));
+    console.log(pMedicine)
     res.render("home", {
+      pMedicine,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
