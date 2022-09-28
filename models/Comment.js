@@ -33,7 +33,7 @@ Comment.init(
       references: {
         model: "medication",
         key: "id",
-        unique: true,
+        unique: false,
       },
     },
   },

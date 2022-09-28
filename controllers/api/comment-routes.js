@@ -29,15 +29,14 @@ router.get("/:id", async (req, res) => {
 //POST route Comment
 router.post("/", async (req, res) => {
   try {
-    const commentData = await Comment.Create(req.body.comment, {
-      where: {
-        user_id: req.session.user_id,
-      },
-    });
+    console.log(req.body)
+
+    const commentData = await Comment.create(req.body);
     res
       .status(200)
       .json(commentData, { message: "Successfully created comment!" });
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 });
