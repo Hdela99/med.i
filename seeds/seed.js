@@ -15,7 +15,6 @@ const seedAll = async () => {
   // }
 
   await seedMedication();
-
   await seedComment();
   await seedUserMedication();
 
