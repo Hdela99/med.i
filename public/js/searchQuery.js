@@ -17,8 +17,8 @@ const searchHandler = async function (event) {
     method: "POST",
     body: JSON.stringify({
       medication_name: query,
-      // adverse_effects: adverse_effects,
-      // route_of_medication: route_of_medication,
+      adverse_effects,
+      route_of_medication,
     }),
     headers: {
       "Content-Type": "application/json"
