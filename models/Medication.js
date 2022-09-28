@@ -26,6 +26,7 @@ Medication.init(
       allowNull: true,
       defaultValue: "routeHolder",
     },
+
   },
   {
     sequelize,

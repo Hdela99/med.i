@@ -4,6 +4,9 @@ const searchHandler = async function (event) {
   console.log(query);
   const routeArray = await getRoutes(query);
   const effectArray = await getAdverseEffects(query);
+  const intArray = await getInteraction(query);
+  let drug_interactions = intArray.toString();
+  console.log("Drug interactions: " + typeof drug_interactions);
    let adverse_effects = effectArray.toString();
    console.log("ADVERSE TYPE: " + typeof adverse_effects);
    let route_of_medication = routeArray.toString();
@@ -21,14 +24,30 @@ const searchHandler = async function (event) {
       "Content-Type": "application/json"
     },
   })
-  // if(response.ok){
+  if(response.ok){
 
-  //   console.log(query);
-  //   console.log("Somehow got it to enter!");
-  // }else {
-  //   alert("Failed to send to medication url");
-  // } 
-  // return query;
+    console.log(query);
+    console.log("Somehow got it to enter!");
+  }else {
+    alert("Failed to send to medication url");
+  } 
+
+  // response.then((medication_name) => {
+  //   const putter =  fetch(`/api/medication/:${medication_name}`, {
+  //     method: "PUT",
+  //     body: JSON.stringify({
+  //       adverse_effects,
+  //       route_of_medication
+  //     }),
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },    
+  // })
+  // if(putter.ok){
+  //   console.log()
+  // }
+  // })
+  return query;
 };
 
 document.querySelector("#findRx").addEventListener("submit", searchHandler);
@@ -46,7 +65,7 @@ async function getInteraction(drug) {
       let testArray = data.results.map((element) => {
         return element.term;
       });
-      console.log(testArray);
+     // console.log(testArray);
       mainArray = testArray;
       return testArray; //returns array of each medicine that were reported to have adverse effects, maybe lets do the first 10-15 to not have a super long list.
     });
