@@ -7,7 +7,7 @@ const apiKey = process.env.API_KEY;
 // Gets all medications from the DB
 router.get("/", async (req, res) => {
   try {
-<<<<<<< HEAD
+
     let drug = req.body.drug;
     let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:${drug}`;
 
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
     console.log(drugFx);
 
     res.status(200).json(drugFx);
-=======
+
     const searchData = await Medication.findAll();
     // const meds = searchData.map((med) => med.get({ plain: true }));
     // console.log(meds);
@@ -26,7 +26,6 @@ router.get("/", async (req, res) => {
     //   meds,
     //   loggedIn: req.session.loggedIn,
     // });
->>>>>>> HectorsTesterbranch
   } catch (err) {
     res.status(500).json(err);
   }

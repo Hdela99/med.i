@@ -1,23 +1,28 @@
 const router = require("express").Router();
 const withAuth = require("../utils/auth");
-const { Medication, User, Comment, UserMedication } = require('../models');
-
+const apiKey = process.env.API_KEY;
+require("dotenv").config();
+const fetch = require("node-fetch");
 // Renders the main page
 //NEEDS WITHAUTH
 
 router.get("/", withAuth, async (req, res) => {
   try {
-    console.log(req.session.userID);
-    const personalMedicine = await User.findByPk(req.session.userID, {
-      include: [{
-        model: Medication,
-        through: UserMedication
-      }]
-    });
-    const pMedicine = personalMedicine.medications.map(rx => rx.get({ plain: true }));
-    console.log(pMedicine)
+    // const medicineData = await Medicine.findAll({
+    //   order: [['post_date', 'DESC']],
+    //   include: [{
+    //     model: User,
+    //     as: 'user',
+    //     attributes: ['username']
+    //   },
+    //   {
+    //     model: Comment,
+    //   }
+    //   ]
+    // });
+    // const medicine = medicineData.map(post => post.get({ plain: true }));
     res.render("home", {
-      pMedicine,
+      // medicine,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
