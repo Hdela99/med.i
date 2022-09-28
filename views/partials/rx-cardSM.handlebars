@@ -1,14 +1,11 @@
 <div class="card" style="width: 19rem;">
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
-            <h5 class="card-title">item 12352{{name}}</h5>
+            <h5 class="card-title">{{medication_name}}</h5>
             <img src="./assets/rx.webp" width="80px">
         </div>
-        <h6 class="card-subtitle mb-2 text-muted">Something else here{{something}}</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ad velit
-            molestiae totam officiis nesciunt atque architecto, dolor dolorum repellendus doloremque optio
-            assumenda odit debitis similique. Iusto possimus illo cupiditate.{{description}}</p>
-        <a href="/api/drug/{{id}}" class="card-link">Drug Facts</a>
-        <a href="https://youtu.be/dQw4w9WgXcQ" class="card-link" target="_blank">Something else?</a>
+        <h6 class="card-subtitle mb-2 text-muted">Intake Route:{{route_of_medication}}</h6>
+        <p class="card-text">{{description}}</p>
+        <a href="/drug/{{id}}" class="card-link">Drug Facts</a>
     </div>
 </div>
