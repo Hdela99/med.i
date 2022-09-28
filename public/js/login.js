@@ -9,6 +9,7 @@ const loginHandler = async (event) => {
       headers: { "Content-Type": "application/json" },
     });
     if (loginResponse.ok) {
+      let new_user = false;
       let loggedIn = true;
       document.location.replace("/");
     } else {

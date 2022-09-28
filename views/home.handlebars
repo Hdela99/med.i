@@ -2,12 +2,12 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             {{#if new_user}}
-            <h1 class="display-4 ">Welcome to Med.i</h1>
+            <h1 class="display-4 ">Welcome {{first_name}} to Med.i</h1>
             <p class="lead">A place to make medicine safe for me.</p>
 
             {{else}}
             <div>
-                <h1 class="display-4 ">Welcome back <i>Omori{{user_name}}</i></h1>
+                <h1 class="display-4 ">Welcome back <i>{{first_name}}</i></h1>
                 <hr>
             </div>
             {{/if}}

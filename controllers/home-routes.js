@@ -19,6 +19,8 @@ router.get("/", withAuth, async (req, res) => {
     res.render("home", {
       medicine,
       loggedIn: req.session.loggedIn,
+      new_user: req.session.new_user,
+      first_name: req.session.firstName,
     });
   } catch (err) {
     res.status(500).json(err);
