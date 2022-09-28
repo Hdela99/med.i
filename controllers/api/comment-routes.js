@@ -2,30 +2,6 @@ const router = require("express").Router();
 const { Comment } = require("../../models");
 const withAuth = require("../../utils/auth"); //-------- Don't forget to add authentication -----------
 
-//GET all Comment
-router.get("/", async (req, res) => {
-  try {
-    const commentData = await Comment.findAll();
-    res.status(200).json(commentData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-//GET one Comment
-router.get("/:id", async (req, res) => {
-  try {
-    //the comment that is received should be linked the medication that the comment refers to......how do I do that?
-    const commentData = await Comment.findByPk(req.params.id);
-    if (!commentData) {
-      res.status(400).json({ message: "No comment found with that id!" });
-    }
-    res.status(200).json(commentData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 //POST route Comment
 router.post("/", async (req, res) => {
   try {

@@ -8,8 +8,6 @@ const apiKey = process.env.API_KEY;
 // Gets all medications from the DB
 router.post("/", async (req, res) => {
   try {
-
-
     res.render("./results", {
       meds,
       loggedIn: req.session.loggedIn,
