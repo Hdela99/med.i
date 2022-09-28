@@ -56,36 +56,77 @@ router.get("/search", withAuth, async (req, res) => {
 router.get("/search/:drug", withAuth, async (req, res) => {
 
   let drug = req.params.drug;
-  console.log(drug)
   let apiKey = process.env.API_KEY;
-  let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:${drug}`;
-
+  let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:"${drug}"`;
   const drugFx = await fetch(url).then((res) => {
     return res.json();
   });
 
   const drugFxObj = { ...drugFx.results[0] };
-  // console.log(drugFxObj)
 
-  // Need to fix to account for situations if the data doesn't exist
-  let medication_name = drugFxObj.openfda.generic_name[0];
-  let effects = drugFxObj.adverse_reactions[0];
-  let route = (!drugFxObj.openfda.route[0] == undefined) ? drugFxObj.openfda.route[0] : "N/A";
-  let type = drugFxObj.openfda.product_type[0];
-  let pharmacology = drugFxObj.clinical_pharmacology[0];
-  let interactions = drugFxObj.drug_interactions[0];
-  let desc = drugFxObj.description[0];
+// Instantiating variables for tests on whether a specific property exists in openFDA API
+  let route, generic_name, adverse_reactions, product_type, clinical_pharmacology, drug_interactions, description;
+  let routeTest = drugFxObj.openfda.route;
+  let nameTest = drugFxObj.openfda.generic_name
+  let reactionsTest = drugFxObj.adverse_reactions
+  let typeTest = drugFxObj.openfda.product_type
+  let pharmacologyTest = drugFxObj.clinical_pharmacology
+  let interactionsTest = drugFxObj.drug_interactions
+  let descriptionTest = drugFxObj.description
 
-  console.log(route)
+  // Handling in the event a specific property doesn't exist within openFDA API
+
+  if (routeTest == undefined) {
+    route = "N/A"
+  } else {
+    route = drugFxObj.openfda.route[0]
+  }
+  
+  if (nameTest == undefined) {
+    generic_name = "N/A"
+  } else {
+    generic_name = drugFxObj.openfda.generic_name[0]
+  }
+  
+  if (reactionsTest == undefined) {
+    adverse_reactions = "N/A"
+  } else {
+    adverse_reactions = drugFxObj.adverse_reactions[0]
+  }
+
+  if (typeTest == undefined) {
+    product_type = "N/A"
+  } else {
+    product_type = drugFxObj.openfda.product_type[0]
+  }
+
+  if (pharmacologyTest == undefined) {
+    clinical_pharmacology = "N/A"
+  } else {
+    clinical_pharmacology = drugFxObj.clinical_pharmacology[0]
+  }
+
+  if (interactionsTest == undefined) {
+    drug_interactions = "N/A"
+  } else {
+    drug_interactions = drugFxObj.drug_interactions[0]
+  }
+  
+  if (descriptionTest == undefined) {
+    description = "N/A"
+  } else {
+    description = drugFxObj.description[0]
+  }
+
 
   const meds = {
-    medication_name: drugFxObj.openfda.generic_name[0],
-    adverse_effects: drugFxObj.adverse_reactions[0],
-    route_of_medication: drugFxObj.openfda.route[0] || "N/A",
-    product_type: drugFxObj.openfda.product_type[0],
-    clinical_pharmacology: drugFxObj.clinical_pharmacology[0],
-    drug_interactions: drugFxObj.drug_interactions[0],
-    description: drugFxObj.description[0]
+    medication_name: generic_name,
+    adverse_effects: adverse_reactions,
+    route_of_medication: route,
+    product_type: product_type,
+    clinical_pharmacology: clinical_pharmacology,
+    drug_interactions: drug_interactions,
+    description: description
   }
 
   res.render("results", {
