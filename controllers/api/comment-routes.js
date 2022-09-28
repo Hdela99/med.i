@@ -32,9 +32,7 @@ router.post("/", async (req, res) => {
     console.log(req.body)
 
     const commentData = await Comment.create(req.body);
-    res
-      .status(200)
-      .json(commentData, { message: "Successfully created comment!" });
+    res.status(200).json(commentData);
   } catch (err) {
     console.log(err)
     res.status(500).json(err);
