@@ -3,24 +3,27 @@ const withAuth = require("../utils/auth");
 const apiKey = process.env.API_KEY;
 require("dotenv").config();
 const fetch = require("node-fetch");
+
+const { Medication } = require('../models')
+
 // Renders the main page
 //NEEDS WITHAUTH
 
 router.get("/", withAuth, async (req, res) => {
   try {
-    // const medicineData = await Medicine.findAll({
-    //   order: [['post_date', 'DESC']],
-    //   include: [{
-    //     model: User,
-    //     as: 'user',
-    //     attributes: ['username']
-    //   },
-    //   {
-    //     model: Comment,
-    //   }
-    //   ]
-    // });
-    // const medicine = medicineData.map(post => post.get({ plain: true }));
+    const medicineData = await Medication.findAll({
+      order: [['post_date', 'DESC']],
+      include: [{
+        model: User,
+        as: 'user',
+        attributes: ['username']
+      },
+      {
+        model: Comment,
+      }
+      ]
+    });
+    const medicine = medicineData.map(post => post.get({ plain: true }));
     res.render("home", {
       // medicine,
       loggedIn: req.session.loggedIn,
@@ -59,7 +62,7 @@ router.get("/signup", async (req, res) => {
 
 router.get("/search", async (req, res) => {
   try {
- 
+
     res.render("search", {
       loggedIn: req.session.loggedIn,
     });
