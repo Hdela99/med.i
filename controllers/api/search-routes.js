@@ -4,64 +4,21 @@ require("dotenv").config();
 const fetch = require("node-fetch");
 const apiKey = process.env.API_KEY;
 
+
 // Gets all medications from the DB
-router.get("/", async (req, res) => {
-  try {
-
-    let drug = req.body.drug;
-    let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:${drug}`;
-
-    const drugFx = await fetch(url).then((res) => {
-      return res.json();
-    });
-    console.log(drugFx);
-
-    res.status(200).json(drugFx);
-
-    const searchData = await Medication.findAll();
-    // const meds = searchData.map((med) => med.get({ plain: true }));
-    // console.log(meds);
-    res.status(200).json(searchData);
-    // res.render("rx-result", {
-    //   meds,
-    //   loggedIn: req.session.loggedIn,
-    // });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 router.post("/", async (req, res) => {
-  //new medication search
   try {
-    const mediResponse = await Medication.create({
-      medication_name: req.body.medication_name,
-      adverse_effects: req.body.adverse_effects,
-      route_of_medication: req.body.route_of_medication,
-    });
 
-    res.status(200).json(`Successfully submitted information!`);
+
+    res.render("./results", {
+      meds,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// TEST ROUTE THIS SHOULD BE DELETED LATER
-router.get("/test", async (req, res) => {
-  try {
-    let drug = req.body.drug;
-    let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:${drug}`;
-
-    const drugFx = await fetch(url).then((res) => {
-      return res.json();
-    });
-    console.log(drugFx.results[0].clinical_pharmacology);
-
-    res.status(200).json(drugFx);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 // The drug route is used to pull drug interactions from the openFDA database
 router.get("/interactions", async (req, res) => {
@@ -137,7 +94,7 @@ router.get("/recall", async (req, res) => {
   } catch (err) {
     res.status(500).json(err)
   }
-  
+
 
 })
 
