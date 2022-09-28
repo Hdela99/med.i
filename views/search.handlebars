@@ -4,13 +4,25 @@
 
     {{!-- {{#if results}} --}}
     {{!-- {{#each results}} --}}
+    {{!-- {{>rx-result}}
     {{>rx-result}}
     {{>rx-result}}
     {{>rx-result}}
-    {{>rx-result}}
-    {{>rx-result}}
+    {{>rx-result}} --}}
 
     {{!-- {{/each}} --}}
     {{!-- {{/if}} --}}
+
+
+<ul> 
+    {{#each drugFxArr}}
+    <li>
+{{term}}
+
+    </li>
+{{/each}}
+
+</ul>
+
 
 </div>

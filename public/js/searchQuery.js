@@ -1,23 +1,52 @@
 const searchHandler = async function (event) {
   event.preventDefault();
   const query = document.querySelector("#search-input").value.trim();
-  // getInteraction(query);
-  // getRoutes(query);
+  console.log(query);
   const routeArray = await getRoutes(query);
   const effectArray = await getAdverseEffects(query);
+  const intArray = await getInteraction(query);
+  let drug_interactions = intArray.toString();
+  console.log("Drug interactions: " + typeof drug_interactions);
+   let adverse_effects = effectArray.toString();
+   console.log("ADVERSE TYPE: " + typeof adverse_effects);
+   let route_of_medication = routeArray.toString();
+   console.log("----------- ROUTE " + typeof route_of_medication);
   console.log(effectArray);
   console.log(routeArray);
-  await fetch(`/api/search`, {
+  const response = await fetch('/api/medication/medName', {    
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify({
       medication_name: query,
-      adverse_effects: effectArray,
-      route_of_medication: routeArray,
+      // adverse_effects: adverse_effects,
+      // route_of_medication: route_of_medication,
     }),
-  });
+    headers: {
+      "Content-Type": "application/json"
+    },
+  })
+  if(response.ok){
+
+    console.log(query);
+    console.log("Somehow got it to enter!");
+  }else {
+    alert("Failed to send to medication url");
+  } 
+
+  // response.then((medication_name) => {
+  //   const putter =  fetch(`/api/medication/:${medication_name}`, {
+  //     method: "PUT",
+  //     body: JSON.stringify({
+  //       adverse_effects,
+  //       route_of_medication
+  //     }),
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },    
+  // })
+  // if(putter.ok){
+  //   console.log()
+  // }
+  // })
   return query;
 };
 
