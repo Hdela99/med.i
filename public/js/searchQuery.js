@@ -10,8 +10,7 @@ const searchHandler = async function (event) {
    console.log("----------- ROUTE " + typeof route_of_medication);
   console.log(effectArray);
   console.log(routeArray);
-  const response = await fetch('/api/medication/medName', {
-
+  const response = await fetch('/api/medication/medName', {    
     method: "POST",
     body: JSON.stringify({
       medication_name: query,
@@ -21,15 +20,15 @@ const searchHandler = async function (event) {
     headers: {
       "Content-Type": "application/json"
     },
-  });
-  if(response.ok){
+  })
+  // if(response.ok){
 
-    console.log(query);
-    console.log("Somehow got it to enter!");
-  }else {
-    alert("Failed to send to medication url");
-  } 
-  return query;
+  //   console.log(query);
+  //   console.log("Somehow got it to enter!");
+  // }else {
+  //   alert("Failed to send to medication url");
+  // } 
+  // return query;
 };
 
 document.querySelector("#findRx").addEventListener("submit", searchHandler);
@@ -89,6 +88,7 @@ async function getAdverseEffects(drug) {
         return element.term;
       });
       mainArray = effectArray;
+     // console.log(mainArray);//THIS WORKS
       return effectArray;
     });
   return mainArray;

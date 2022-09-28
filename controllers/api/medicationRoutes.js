@@ -18,10 +18,6 @@ router.get('/medName', async (req,res) => {
     const medData = await Medication.findAll({
       attributes: {exclude: ['id', 'adverse_effects', 'route_of_medication']},
       order: [['medication_name', 'DESC']]});
-    console.log("TRYING TO SHOW MEDNAME -----------");
-    let medName = JSON.stringify(req.body.medication_name);
-    console.log(medName);
-    console.log(req.body.medication_name);
     console.log("you found medName")
     res.status(200).json(medData);
   } catch (err) {
@@ -31,6 +27,7 @@ router.get('/medName', async (req,res) => {
 //Not finalized yet 9/27/22 146pm
 router.post('/medName', async (req,res) => {
   const newMedName = await Medication.create(req.body);
+  console.log(newMedName);
   const drugName = req.body.medication_name;
   const effURL = `https://api.fda.gov/drug/event.json?api_key=${apiKey}&search=${drugName}&count=patient.reaction.reactionmeddrapt.exact&limit=8`;
   const routesURL =  `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=${drugName}&count=openfda.route.exact&limit=7`;
@@ -41,7 +38,26 @@ router.post('/medName', async (req,res) => {
   }catch(err) {
     res.status(500).json(err);
   }
+});
+//The below route works in insomnia. How do i get it to work outside of it tho.
+router.put('/:medication_name', async(req, res) => {
+  const medication_name = req.params.medication_name;
+  console.log("LOGGING NAME _____----___---")
+  console.log(medication_name);
+    try {
+      const medData = await Medication.update(req.body, {
+        where: {medication_name: req.params.medication_name }
+      })
+      if(!medData[0]) {
+        res.status(404).json({message: "no medicine by that name"});
+        return
+      };
+      res.status(200).json({message: `successfully updated  ${req.params.medication_name}`})
+    }catch(err) {
+      res.status(500).json(err);
+    }
 })
+
 
 router.post("/", async (req, res) => {
   const drugName = req.body.medication_name;
