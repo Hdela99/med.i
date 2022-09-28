@@ -15,16 +15,16 @@ Medication.init(
     medication_name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     adverse_effects: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
-      defaultValue: "FXholder",
     },
     route_of_medication: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: "routeHolder",
+      // defaultValue: "routeHolder",
     },
 
   },

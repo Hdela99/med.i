@@ -16,13 +16,13 @@ router.post("/", async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.userName = newUserData.user_name;
-      req.session.firstName = loginData.first_name;
+      req.session.firstName = newUserData.first_name;
 
       req.session.email = newUserData.email;
       req.session.userID = newUserData.id;
 
       res.status(200).json(newUserData);
-    });
+    }); 
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

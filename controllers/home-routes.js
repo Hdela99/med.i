@@ -59,23 +59,8 @@ router.get("/signup", async (req, res) => {
 
 router.get("/search", async (req, res) => {
   try {
-    // FE JS takes the input queries, processes using the search-routes we have established
-    let drug = req.body.drug;
-    let url = `https://api.fda.gov/drug/event.json?api_key=${apiKey}&search=ibuprofen&count=patient.reaction.reactionmeddrapt.exact&limit=10`;
-
-    // Formatting data
-    const drugFx = await fetch(url).then((res) => {
-      return res.json();
-    });
-    // let drugFxArr = drugFx.results.map((element) => {
-    //   return element.term;
-    // });
-
-    let drugFxArr = drugFx.results;
-    console.log(drugFxArr);
-    // Passes it to the res.render for whatever our results should look like
+ 
     res.render("search", {
-      drugFxArr,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
@@ -84,9 +69,38 @@ router.get("/search", async (req, res) => {
 });
 //NEEDS WITHAUTH
 
+router.get("/search/:drug", async (req, res) => {
+
+  let drug = req.params.drug;
+  let apiKey = process.env.API_KEY;
+  let url = `https://api.fda.gov/drug/label.json?api_key=${apiKey}&search=description:${drug}`;
+
+  const drugFx = await fetch(url).then((res) => {
+    return res.json();
+  });
+
+  const drugFxObj = { ...drugFx.results[0] };
+
+
+  const meds = {
+    medication_name: drugFxObj.openfda.generic_name[0],
+    adverse_effects: drugFxObj.adverse_reactions[0],
+    route_of_medication: drugFxObj.openfda.route[0],
+    product_type: drugFxObj.openfda.product_type[0],
+    clinical_pharmacology: drugFxObj.clinical_pharmacology[0]
+  }
+
+  res.render("results", {
+    meds,
+    loggedIn: req.session.loggedIn,
+  });
+})
+
 router.get("/results", async (req, res) => {
   try {
+
     res.render("results", {
+      med,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
