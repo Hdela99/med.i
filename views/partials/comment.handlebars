@@ -2,14 +2,10 @@
     <div class="d-flex card-body justify-content-between align-items-center">
         <p class="card-text">{{comment}}</p>
 
-        {{!-- {{#if (eq currentUID user_id)}} --}}
-        <button class="btn btn-link" id="deleteCommentBt" value="{{id}}"><img class="" src="../img/trash.svg"
-                alt="bootstrap Trashcan icon" width="25" height="25"></button>
-        {{!-- {{/if}} --}}
     </div>
 
     <div class="d-flex card-header border-top ">
-        <p class="ms-auto"> - <i>{{user.username}}</i> on: {{format_date comment_date}} </p>
+        <p class="ms-auto"> - <i>{{user}}</i> on: {{format_date createdAt}} </p>
     </div>
 
 </section>

@@ -2,7 +2,7 @@ const { Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/connection.js");
 
-class Medication extends Model {}
+class Medication extends Model { }
 
 Medication.init(
   {
@@ -26,7 +26,14 @@ Medication.init(
       allowNull: true,
       // defaultValue: "routeHolder",
     },
-
+    drug_interactions: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    }
   },
   {
     sequelize,

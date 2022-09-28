@@ -1,3 +1,8 @@
+
+
+
+
+
 <div class="carousel-item">
     <div class="col-md-3 ">
         <div class="card" style="width: 19rem;">
@@ -6,9 +11,9 @@
                     <h5 class="card-title">{{medication_name}}</h5>
                     <img src="./assets/rx.webp" width="80px">
                 </div>
-                <h6 class="card-subtitle mb-2 text-muted">{{adverse_effects}}</h6>
-                <p class="card-text">{{route_of_medication}}</p>
-                <a href="/api/drug/{{id}}" class="card-link">Drug Facts</a>
+                <h6 class="card-subtitle mb-2 text-muted">Route of Intake: {{route_of_medication}}</h6>
+                <p class="card-text">{{description}}</p>
+                <a href="/drug/{{id}}" class="card-link">Drug Facts</a>
                 <a href="https://youtu.be/dQw4w9WgXcQ" class="card-link" target="_blank">Something else?</a>
             </div>
         </div>

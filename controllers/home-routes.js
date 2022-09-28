@@ -4,28 +4,21 @@ const apiKey = process.env.API_KEY;
 require("dotenv").config();
 const fetch = require("node-fetch");
 
-const { Medication } = require('../models')
+const { Medication, User, UserMedication, Comment } = require('../models')
 
 // Renders the main page
 //NEEDS WITHAUTH
 
 router.get("/", withAuth, async (req, res) => {
   try {
-    const medicineData = await Medication.findAll({
-      order: [['post_date', 'DESC']],
-      include: [{
-        model: User,
-        as: 'user',
-        attributes: ['username']
-      },
-      {
-        model: Comment,
-      }
-      ]
+    const userMedicine = await User.findByPk(req.session.userID, {
+      include: [{ model: Medication, through: UserMedication }]
     });
-    const medicine = medicineData.map(post => post.get({ plain: true }));
+    const medicine = userMedicine.medications.map(medicine => medicine.get({ plain: true }));
+    // console.log(userMedicine)
+    console.log(medicine)
     res.render("home", {
-      // medicine,
+      medicine,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
@@ -72,7 +65,8 @@ router.get("/search", async (req, res) => {
 });
 //NEEDS WITHAUTH
 
-router.get("/search/:drug", async (req, res) => {
+// Search Route for finding information from openFDA API
+router.get("/search/:drug", withAuth, async (req, res) => {
 
   let drug = req.params.drug;
   let apiKey = process.env.API_KEY;
@@ -84,13 +78,14 @@ router.get("/search/:drug", async (req, res) => {
 
   const drugFxObj = { ...drugFx.results[0] };
 
-
   const meds = {
     medication_name: drugFxObj.openfda.generic_name[0],
     adverse_effects: drugFxObj.adverse_reactions[0],
     route_of_medication: drugFxObj.openfda.route[0],
     product_type: drugFxObj.openfda.product_type[0],
-    clinical_pharmacology: drugFxObj.clinical_pharmacology[0]
+    clinical_pharmacology: drugFxObj.clinical_pharmacology[0],
+    drug_interactions: drugFxObj.drug_interactions[0],
+    description: drugFxObj.description[0]
   }
 
   res.render("results", {
@@ -124,18 +119,48 @@ router.get("/alerts", async (req, res) => {
 
 router.get("/COMMENTTEST", async (req, res) => {
   try {
-    res.render("rx", {
-      // loggedIn: req.session.loggedIn
-    });
+    // const testData = await Comment.findAll()
+    // console.log(testData)
+
+    // res.render("rx", {
+    //   // loggedIn: req.session.loggedIn
+    // });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // View specific drug
-router.get('/drug/:id', withAuth, async (req, res) => {
+router.get('/drug/:id', async (req, res) => {
   try {
+
+    // const testData = await Comment.findAll()
+    // // {
+    //   // include: [{model: Medication}]
+    // // })
+
+    const medicationData = await Medication.findByPk(req.params.id, {
+      include: [{
+        model: Comment, include: [{
+          model: User,
+          attributes: ['user_name']
+        }]
+      }]
+    });
+
+
+    const meds = medicationData.get({ plain: true })
+
+    // console.log(meds)
+
+    const comments = meds.comments;
+    delete meds.comments
+    comments.forEach(element => {element.user = element.user.user_name})
+    
+
     res.render('rx', {
+      meds,
+      comments,
       loggedIn: req.session.loggedIn,
     })
   } catch (err) {
