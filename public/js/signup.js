@@ -19,6 +19,7 @@ const signupHandler = async (event) => {
       headers: { "Content-Type": "application/json" },
     });
     if (loginResponse.ok) {
+      let new_user = true;
       document.location.replace("/");
     } else {
       

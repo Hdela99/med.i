@@ -43,6 +43,6 @@ app.use(routes);
 // Uncomment the following when DB is setup
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
-    console.log(`App listening on port http://localhost:${PORT}!`);
+    console.log(`App listening on port http://localhost:${PORT} !`);
   });
 });

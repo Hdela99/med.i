@@ -36,7 +36,7 @@ Comment.belongsTo(User, {
   foreignKey: "user_id",
 });
 
-module.exports = { User, Medication, Comment };
+module.exports = { User, Medication, Comment, UserMedication };
 
 //A.hasOne(B) foreignKey is in target model (B)
 //A.belongsTo(B) foreignKey is in source model A

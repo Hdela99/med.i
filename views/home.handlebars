@@ -2,12 +2,12 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             {{#if new_user}}
-            <h1 class="display-4 ">Welcome to Med.i</h1>
+            <h1 class="display-4 ">Welcome {{first_name}} to Med.i</h1>
             <p class="lead">A place to make medicine safe for me.</p>
 
             {{else}}
             <div>
-                <h1 class="display-4 ">Welcome back <i>Omori{{user_name}}</i></h1>
+                <h1 class="display-4 ">Welcome back <i>{{first_name}}</i></h1>
                 <hr>
             </div>
             {{/if}}
@@ -25,15 +25,9 @@
         <div id="rxCarousel" class="carousel slide d-none d-lg-block " data-bs-ride="carousel">
             <div class="carousel-inner" role="listbox">
 
-                {{!-- {{#each rxItem}} --}}
+                {{#each medicine}}
                 {{> carousel-item}}
-                {{> carousel-item}}
-                {{> carousel-item}}
-                {{> carousel-item}}
-                {{> carousel-item}}
-
-
-                {{!-- {{/each}} --}}
+                {{/each}}
 
             </div>
             <a class="carousel-control-prev bg-transparent w-aut" href="#rxCarousel" role="button" data-bs-slide="prev">
@@ -51,12 +45,10 @@
         <div id="smallContent" class="container-fluid d-flex d-lg-none flex-sm-column">
 
 
-            {{!-- {{#each rx}} --}}
+            {{#each medicine}}
             {{> rx-card}}
-            {{> rx-card}}
-            {{> rx-card}}
-            {{> rx-card}}
-            {{!-- {{/each}} --}}
+
+            {{/each}}
 
 
         </div>
@@ -64,20 +56,19 @@
         <div id="lowContent" class="container-fluid d-none d-lg-flex justify-content-around p-1">
 
 
-            {{!-- {{#each rx}} --}}
+            {{#each medicine}}
             {{> rx-cardSM}}
-            {{> rx-cardSM}}
-            {{> rx-cardSM}}
-            {{!-- {{/each}} --}}
+
+            {{/each}}
 
 
         </div>
     </div>
 
-<hr>
+    <hr>
     <div class="d-flex justify-content-center">
-        <a class="d-flex flex-column align-items-center justify-content-center  text-decoration-none"
-            href="/api/addRx" style="width: fit-content"><img src="./assets/plus.svg" width="80px" class="filter-blue">
+        <a class="d-flex flex-column align-items-center justify-content-center  text-decoration-none" href="/search"
+            style="width: fit-content"><img src="./assets/plus.svg" width="80px" class="filter-blue">
             <p class="fs-6 fst-italic text-muted">Add another Rx</p>
         </a>
 

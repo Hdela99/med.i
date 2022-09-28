@@ -1,0 +1,33 @@
+{{!-- Credits to https://github.com/marcelodolza/iziModal for the modal --}}
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" href="/css/iziModal.min.css">
+
+
+<!-- Modal structure -->
+<div id="modal" style="">
+    <!-- Modal content -->
+    <div class="iziModal-header" style="background: rgb(189, 91, 91); padding-right: 44px;">
+        <h3 class="iziModal-header-title">Alert!</h3>
+        <div class="iziModal-header-buttons">
+            <a href="javascript:void(0)" data-izimodal-close><img class="filter-white" src="/assets/x-circle.svg" style="height:25px;"></a>
+        </div>
+
+    </div>
+
+    <div class="iziModal-wrap" style="padding:20px; height: 322px;">
+        <div class="iziModal-content">
+            <p>The following Rx has been identified to have recalls required!</p>
+            <ul>
+                <li>123345</li>
+            </ul>
+            <button data-izimodal-close="" data-izimodal-transitionout="bounceOutDown">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Trigger to open Modal -->
+<a href="#" class="trigger">Alert!</a>
+
+<script src="/js/iziModal.min.js"></script>
+<script src="./js/modal.js" type="application/javascript"></script>

@@ -1,16 +1,21 @@
-<div class="border border-dark rounded my-3 mx-auto p-3" style="min-width: 100%">
-    <div class="row g-0">
+<div
+  class="border border-dark rounded my-3 mx-auto p-3"
+  style="min-width: 100%"
+>
+  <div class="row g-0">
 
-        <div class="col-12">
-            <div style="font-size: 3vw;" class="">
-                <h5 class="display-2"><img src="./assets/rx.webp" width="100px">Ibuprofin {{name}}</h5>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta voluptatibus
-                    perferendis mollitia ipsa provident dolorum?{{description}}</p>
-                <div>
-                    <a href="#" class="card-link">Drug Facts</a>
-                    <a href="#" class="card-link">Something else?</a>
-                </div>
-            </div>
+    <div class="col-12">
+      <div style="font-size: 3vw;" class="">
+        <h5 class="display-2"><img
+            src="./assets/rx.webp"
+            width="100px"
+          />
+          {{medication_name}}</h5>
+        <p>{{description}}</p>
+        <div>
+          <a href="/drug/{{id}}" class="card-link">Drug Facts</a>
         </div>
+      </div>
     </div>
+  </div>
 </div>

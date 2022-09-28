@@ -1,8 +1,12 @@
 
 {{> rx-result}}
 
-{{!-- {{comments}} --}}
+
+{{#each comments}}
+{{> comment}}
+
+{{/each}}
+
 
 {{> commentInput}}
 
-{{!-- {{>newPostButton}} --}}

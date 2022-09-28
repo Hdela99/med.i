@@ -1,17 +1,29 @@
 <div class="card my-2 col-12">
-    <div class="d-flex align-items-center">
+  
+
+      <div class="d-flex align-items-center">
         <div class="card-body">
-            <div class="d-flex my-2">
-                <img class="mx-2" src="./assets/prescription.svg" width="50px">
-                <div>
-                    <h5 class="card-title">Ibuprofin</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Something else here</h6>
-                </div>
+          <div class="d-flex my-2">
+            <img class="mx-2" src="../assets/prescription.svg" width="50px" />
+            <div>
+              <h5 id="medication_name" class="card-title" data-value="{{meds.medication_name}}">{{meds.medication_name}}
+              </h5>
+              <h6 id="productType" class="card-subtitle mb-2 text-muted">{{meds.product_type}}</h6>
+              <h6 id="route" class="card-subtitle mb-2 text-muted" data-value="{{meds.route_of_medication}}">
+                {{meds.route_of_medication}}</h6>
             </div>
-            <p class="card-text">Description on that the drug is meant for?</p>
+          </div>
+          <p id="drug_interactions" class="card-text" data-value="{{meds.drug_interactions}}"><i>Drug Interactions: </i>{{meds.drug_interactions}}
+          </p>
 
         </div>
 
-        <a href="/api/addRx"><img src="./assets/plus.svg" width="80px" class="filter-blue"></a>
+        <a id="addRxBt" href="#"><img src="../assets/plus.svg" width="80px" class="filter-blue" /></a>
+      </div>
     </div>
-</div>
+
+    <meta id="adverseFx" data-value="{{meds.adverse_effects}}">
+    <meta id="description" data-value="{{meds.description}}">
+    <meta id="rx-id" data-value="{{meds.id}}">
+
+    <script src="../js/addRx.js"></script>

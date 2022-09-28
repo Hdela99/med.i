@@ -16,11 +16,13 @@ router.post("/", async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.userName = newUserData.user_name;
+      req.session.firstName = newUserData.first_name;
+      req.session.new_user = true;
       req.session.email = newUserData.email;
       req.session.userID = newUserData.id;
 
       res.status(200).json(newUserData);
-    });
+    }); 
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -36,6 +38,7 @@ router.post("/login", async (req, res) => {
       },
     });
 
+    console.log(loginData)
     if (!loginData) {
       res.status(400).json({ message: "Error, try again!" });
       return;
@@ -51,8 +54,10 @@ router.post("/login", async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.userName = loginData.user_name;
+      req.session.firstName = loginData.first_name;
       req.session.email = loginData.email;
       req.session.userID = loginData.id;
+      req.session.new_user = false;
 
       res.status(200).json({ username: loginData, message: "Login Success!" });
     });
