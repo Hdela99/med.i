@@ -2,12 +2,12 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             {{#if new_user}}
-            <h1 class="display-4 ">Welcome to Med.i</h1>
+            <h1 class="display-4 ">Welcome {{first_name}} to Med.i</h1>
             <p class="lead">A place to make medicine safe for me.</p>
 
             {{else}}
             <div>
-                <h1 class="display-4 ">Welcome back <i>Omori{{user_name}}</i></h1>
+                <h1 class="display-4 ">Welcome back <i>{{first_name}}</i></h1>
                 <hr>
             </div>
             {{/if}}
@@ -67,7 +67,7 @@
 
     <hr>
     <div class="d-flex justify-content-center">
-        <a class="d-flex flex-column align-items-center justify-content-center  text-decoration-none" href="/api/addRx"
+        <a class="d-flex flex-column align-items-center justify-content-center  text-decoration-none" href="/search"
             style="width: fit-content"><img src="./assets/plus.svg" width="80px" class="filter-blue">
             <p class="fs-6 fst-italic text-muted">Add another Rx</p>
         </a>

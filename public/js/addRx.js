@@ -8,11 +8,8 @@ const addRxHandler = async () => {
     const adverse_effects = document.getElementById('adverseFx').dataset.value;
     const drug_interactions = document.getElementById('drug_interactions').dataset.value;
     const description = document.getElementById('description').dataset.value;
-
-
     // let adverse_effects = test.replace(`"`, `'`)
     // const rxInfo = {medication_name, route_of_medication, adverse_effects}
-
     // console.log(rxInfo)
     if (medication_name && route_of_medication && adverse_effects) {
         const response = await fetch('/api/medication/', {

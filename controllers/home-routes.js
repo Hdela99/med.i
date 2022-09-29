@@ -14,17 +14,18 @@ router.get("/", withAuth, async (req, res) => {
     const userMedicine = await User.findByPk(req.session.userID, {
       include: [{ model: Medication, through: UserMedication }]
     });
-    const medicine = userMedicine.medications.map(medicine => medicine.get({ plain: true }));
+    const medicine = userMedicine.medications.map((medicine) => medicine.get({ plain: true }));
 
     res.render("home", {
       medicine,
       loggedIn: req.session.loggedIn,
+      new_user: req.session.new_user,
+      first_name: req.session.firstName,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 router.get("/login", async (req, res) => {
   try {
     res.render("login");
@@ -32,7 +33,6 @@ router.get("/login", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 router.get("/signup", async (req, res) => {
   try {
     res.render("signup");
@@ -40,8 +40,6 @@ router.get("/signup", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-
 router.get("/search", withAuth, async (req, res) => {
   try {
     res.render("search", {

@@ -4,3 +4,5 @@ node_modules
 /public/assets/fields.xlsx
 ./public/assets/~$fields
 public/assets/~$fields.xlsx
+searchQuery.js
+altMedicationRoutes.js
