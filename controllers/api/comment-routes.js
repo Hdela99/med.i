@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const { Comment } = require("../../models");
-const withAuth = require("../../utils/auth"); //-------- Don't forget to add authentication -----------
+const withAuth = require("../../utils/auth");
 
 //POST route Comment
-router.post("/", async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
   try {
 
     req.body.user_id = req.session.userID;
@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 });
 
 //PUT route Comment
-router.put("/:id", async (req, res) => {
+router.put("/:id", withAuth, async (req, res) => {
   try {
     const commentData = await Comment.update(req.body, {
       where: {
@@ -36,7 +36,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //DELETE route Comment
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
   //this makes sure the User deleting the comment is the User that created it
   const comment = await Comment.findByPk(req.params.id);
 

@@ -9,10 +9,6 @@ const seedAll = async () => {
   await sequelize.sync({ force: true });
 
   await seedUser();
-  // for (user in userData) {
-  //   console.log(user)
-  //   await User.create(user);
-  // }
 
   await seedMedication();
   await seedComment();

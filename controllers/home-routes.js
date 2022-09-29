@@ -7,7 +7,6 @@ const fetch = require("node-fetch");
 const { Medication, User, UserMedication, Comment } = require('../models')
 
 // Renders the main page
-//NEEDS WITHAUTH
 
 router.get("/", withAuth, async (req, res) => {
   try {
@@ -73,7 +72,6 @@ router.get("/search/:drug", withAuth, async (req, res) => {
   let descriptionTest = drugFxObj.description
 
   // Handling in the event a specific property doesn't exist within openFDA API
-
   if (routeTest == undefined) {
     route = "N/A"
   } else {
@@ -134,7 +132,7 @@ router.get("/search/:drug", withAuth, async (req, res) => {
 })
 
 
-//NEEDS WITHAUTH
+// Alerts route
 router.get("/alerts", withAuth, async (req, res) => {
   try {
     let alertsArr = [];
